@@ -1,0 +1,3233 @@
+<!DOCTYPE html>
+<html lang="kn" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhwani (ಧ್ವನಿ) - Your voice. Your shop. • Karnataka</title>
+  <meta name="description" content="Voice-first micro-commerce & lender-ready business passports for women and micro-entrepreneurs across Karnataka." />
+
+  <!-- Google Fonts: Fraunces, Noto Sans, Noto Sans Kannada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dhwani: {
+              turmeric: '#E8A317',
+              turmericDark: '#C7890C',
+              turmericLight: '#FEF3C7',
+              green: '#1F5E4B',
+              greenDark: '#154134',
+              greenLight: '#E6F4F1',
+              cream: '#FFF8EC',
+              creamDark: '#F7E7CD',
+              terracotta: '#C8553D',
+              terracottaLight: '#FBEBE8',
+              ink: '#2B2B2B',
+              muted: '#6B7280',
+              border: '#E8DFD1',
+              card: '#FFFFFF',
+            }
+          },
+          fontFamily: {
+            display: ['Fraunces', 'serif'],
+            body: ['"Noto Sans"', '"Noto Sans Kannada"', '"Noto Sans Devanagari"', 'sans-serif'],
+            kannada: ['"Noto Sans Kannada"', '"Noto Sans"', 'sans-serif'],
+            hindi: ['"Noto Sans Devanagari"', '"Noto Sans"', 'sans-serif'],
+          },
+          borderRadius: {
+            '20': '20px',
+            '30': '30px',
+          },
+          boxShadow: {
+            'soft': '0 8px 30px rgba(43, 43, 43, 0.06)',
+            'glow': '0 0 35px rgba(232, 163, 23, 0.35)',
+            'card': '0 4px 20px rgba(31, 94, 75, 0.08)',
+          },
+          animation: {
+            'pulse-ring': 'pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite',
+            'pop-in': 'pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+          },
+          keyframes: {
+            'pulse-ring': {
+              '0%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(232, 163, 23, 0.7)' },
+              '70%': { transform: 'scale(1.15)', boxShadow: '0 0 0 25px rgba(232, 163, 23, 0)' },
+              '100%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(232, 163, 23, 0)' },
+            },
+            'pop-in': {
+              '0%': { opacity: '0', transform: 'scale(0.9) translateY(10px)' },
+              '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Supabase JS Client v2 (Pinned) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Chart.js (Pinned) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- QRCode.js (Pinned) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Canvas Confetti (Pinned) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background-color: #FFF8EC;
+      color: #2B2B2B;
+      font-family: 'Noto Sans', 'Noto Sans Kannada', 'Noto Sans Devanagari', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .font-serif-heading {
+      font-family: 'Fraunces', serif;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-certificate-area, #print-certificate-area * {
+        visibility: visible;
+      }
+      #print-certificate-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: #ffffff !important;
+        padding: 20px;
+        box-shadow: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      @page {
+        margin: 1cm;
+        size: A4 portrait;
+      }
+    }
+
+    .soundwave-bar {
+      width: 4px;
+      border-radius: 99px;
+      background: currentColor;
+      transition: height 0.08s ease;
+      min-height: 4px;
+    }
+  </style>
+
+  <!-- SUPABASE CONFIG -->
+  <script>
+    window.DHWANI_CONFIG = {
+      SUPABASE_URL: "https://your-project.supabase.co",
+      SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_anon_key_for_dhwani_karnataka_preview",
+    };
+  </script>
+</head>
+<body class="min-h-full flex flex-col antialiased selection:bg-dhwani-turmeric selection:text-white">
+
+  <!-- ====================================================================
+       1. TOP NAVIGATION BAR (STRICT TRILINGUAL LOCALIZATION)
+  ==================================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-dhwani-border shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <!-- Logo Lockup -->
+      <a href="#/" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric rounded-lg p-1">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-dhwani-turmeric to-dhwani-terracotta flex items-center justify-center text-white shadow-md transform group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M12 3v18M8 6v12M4 9v6M16 6v12M20 9v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5 leading-none">
+            <span class="font-display text-2xl font-bold text-dhwani-green tracking-tight">Dhwani</span>
+            <span class="text-sm font-bold text-dhwani-terracotta bg-dhwani-cream px-1.5 py-0.5 rounded border border-dhwani-border/60">ಧ್ವನಿ</span>
+          </div>
+          <span class="text-[11px] text-dhwani-muted font-medium tracking-wide" data-i18n="tagline">Your voice. Your shop. • Karnataka</span>
+        </div>
+      </a>
+
+      <!-- Right Navigation Actions -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Mode Badge -->
+        <div id="mode-badge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+          <span id="mode-text">Demo Mode (Karnataka)</span>
+        </div>
+
+        <!-- Quick Links -->
+        <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <a href="#/discover" class="px-3 py-1.5 rounded-lg text-dhwani-ink hover:text-dhwani-green hover:bg-dhwani-cream transition" data-i18n="nav_discover">Discover & Buy</a>
+          <a href="#/sell" class="px-3 py-1.5 rounded-lg text-dhwani-ink hover:text-dhwani-green hover:bg-dhwani-cream transition font-semibold text-dhwani-green" data-i18n="nav_start_shop">Start Shop (Voice)</a>
+          <a href="#/dashboard" class="px-3 py-1.5 rounded-lg text-dhwani-ink hover:text-dhwani-green hover:bg-dhwani-cream transition" data-i18n="nav_dashboard">Dashboard</a>
+          <a href="#/demo" class="px-3 py-1.5 rounded-lg text-dhwani-terracotta bg-dhwani-terracotta/10 hover:bg-dhwani-terracotta/20 font-semibold transition" data-i18n="nav_live_demo">⚡ Live Demo</a>
+        </nav>
+
+        <!-- Language Switcher -->
+        <div class="relative inline-block text-left" id="lang-menu-container">
+          <button id="lang-btn" onclick="toggleLangDropdown()" aria-label="Change Language" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-dhwani-cream border border-dhwani-border rounded-xl text-dhwani-green hover:bg-white transition focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric">
+            <i data-lucide="languages" class="w-4 h-4 text-dhwani-turmeric"></i>
+            <span id="current-lang-label">ಕನ್ನಡ</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+          </button>
+          <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-2xl shadow-xl border border-dhwani-border py-1.5 z-50 animate-pop-in">
+            <button onclick="setLanguage('kn')" class="w-full text-left px-4 py-2.5 text-sm text-dhwani-ink hover:bg-dhwani-cream flex items-center justify-between font-bold">
+              <span>ಕನ್ನಡ (Kannada)</span> <span class="text-xs text-dhwani-muted">KN</span>
+            </button>
+            <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-dhwani-ink hover:bg-dhwani-cream flex items-center justify-between font-bold">
+              <span>English</span> <span class="text-xs text-dhwani-muted">EN</span>
+            </button>
+            <button onclick="setLanguage('hi')" class="w-full text-left px-4 py-2.5 text-sm text-dhwani-ink hover:bg-dhwani-cream flex items-center justify-between font-bold">
+              <span>हिन्दी (Hindi)</span> <span class="text-xs text-dhwani-muted">HI</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       2. TOAST NOTIFICATION CONTAINER & WEB AUDIO SYNTHESIZER
+  ==================================================================== -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <script>
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      playChime(type = 'success') {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          if (type === 'order') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(587.33, now);
+            osc.frequency.setValueAtTime(880, now + 0.12);
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            osc.start(now);
+            osc.stop(now + 0.6);
+          } else if (type === 'mic') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            osc.start(now);
+            osc.stop(now + 0.25);
+          } else {
+            const freqs = [523.25, 659.25, 783.99, 1046.50];
+            freqs.forEach((f, idx) => {
+              const o = this.ctx.createOscillator();
+              const g = this.ctx.createGain();
+              o.type = 'sine';
+              o.frequency.value = f;
+              o.connect(g);
+              g.connect(this.ctx.destination);
+              const startT = now + idx * 0.08;
+              g.gain.setValueAtTime(0.15, startT);
+              g.gain.exponentialRampToValueAtTime(0.0001, startT + 0.5);
+              o.start(startT);
+              o.stop(startT + 0.5);
+            });
+          }
+        } catch (e) {}
+      }
+    };
+
+    function showToast(title, message = '', type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bgColors = {
+        success: 'bg-dhwani-green text-white border-dhwani-greenDark',
+        order: 'bg-dhwani-turmeric text-dhwani-ink border-dhwani-turmericDark',
+        error: 'bg-dhwani-terracotta text-white border-red-800',
+        info: 'bg-white text-dhwani-ink border-dhwani-border shadow-lg',
+      };
+      const icons = {
+        success: 'check-circle-2',
+        order: 'bell-ring',
+        error: 'alert-circle',
+        info: 'info',
+      };
+
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-20 border shadow-lg transform transition-all duration-300 animate-pop-in ${bgColors[type] || bgColors.info}`;
+      toast.innerHTML = `
+        <div class="mt-0.5"><i data-lucide="${icons[type] || 'info'}" class="w-5 h-5"></i></div>
+        <div class="flex-1">
+          <div class="font-bold text-sm">${title}</div>
+          ${message ? `<div class="text-xs opacity-90 mt-0.5">${message}</div>` : ''}
+        </div>
+        <button onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100 p-0.5"><i data-lucide="x" class="w-4 h-4"></i></button>
+      `;
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+    }
+  </script>
+
+  <!-- ====================================================================
+       3. MAIN VIEW CONTAINER
+  ==================================================================== -->
+  <main id="app" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 transition-opacity duration-200">
+    <div class="flex flex-col items-center justify-center min-h-[50vh] text-center">
+      <div class="w-12 h-12 border-4 border-dhwani-turmeric border-t-transparent rounded-full animate-spin"></div>
+      <p class="mt-4 text-dhwani-muted font-medium">Loading Dhwani (ಧ್ವನಿ)...</p>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       4. MOBILE NAVIGATION
+  ==================================================================== -->
+  <div class="md:hidden sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-dhwani-border py-2 px-3 flex items-center justify-around text-xs shadow-lg">
+    <a href="#/" class="flex flex-col items-center gap-1 text-dhwani-muted hover:text-dhwani-green py-1 px-2 focus:outline-none">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span data-i18n="mob_home">Home</span>
+    </a>
+    <a href="#/discover" class="flex flex-col items-center gap-1 text-dhwani-muted hover:text-dhwani-green py-1 px-2 focus:outline-none">
+      <i data-lucide="search" class="w-5 h-5"></i>
+      <span data-i18n="mob_explore">Explore</span>
+    </a>
+    <a href="#/sell" class="flex flex-col items-center gap-1 text-white bg-gradient-to-r from-dhwani-turmeric to-dhwani-terracotta -mt-5 p-3 rounded-full shadow-glow transform hover:scale-105 transition focus:outline-none">
+      <i data-lucide="mic" class="w-6 h-6"></i>
+    </a>
+    <a href="#/dashboard" class="flex flex-col items-center gap-1 text-dhwani-muted hover:text-dhwani-green py-1 px-2 focus:outline-none">
+      <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+      <span data-i18n="mob_orders">Orders</span>
+    </a>
+    <a href="#/demo" class="flex flex-col items-center gap-1 text-dhwani-terracotta hover:text-dhwani-terracottaDark py-1 px-2 focus:outline-none font-bold">
+      <i data-lucide="zap" class="w-5 h-5"></i>
+      <span>Demo</span>
+    </a>
+  </div>
+
+  <!-- ====================================================================
+       5. FOOTER
+  ==================================================================== -->
+  <footer class="bg-white border-t border-dhwani-border mt-12 py-8 text-center text-sm text-dhwani-muted">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-left">
+        <div class="w-7 h-7 rounded-lg bg-dhwani-green text-white flex items-center justify-center font-bold text-xs">ಧ್ವ</div>
+        <div>
+          <span class="font-bold text-dhwani-ink">Dhwani (ಧ್ವನಿ)</span>
+          <p class="text-xs text-dhwani-muted" data-i18n="footer_sub">Karnataka Micro-Commerce & Business Passport Platform</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-medium">
+        <span data-i18n="footer_no_gst">No GST Needed</span>
+        <span>•</span>
+        <span data-i18n="footer_zero_install">Zero App Install</span>
+        <span>•</span>
+        <span data-i18n="footer_direct_upi">Direct Bank UPI</span>
+      </div>
+      <div class="text-xs">
+        Crafted with <span class="text-dhwani-terracotta">♥</span> for Karnataka entrepreneurs
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       6. COMPREHENSIVE 100% CONSISTENT I18N DICTIONARY
+  ==================================================================== -->
+  <script>
+    const I18N = {
+      kn: {
+        tagline: "ನಿಮ್ಮ ಧ್ವನಿ. ನಿಮ್ಮ ಅಂಗಡಿ. • ಕರ್ನಾಟಕ",
+        nav_discover: "ಹುಡುಕಿ & ಖರೀದಿಸಿ",
+        nav_start_shop: "ಅಂಗಡಿ ಆರಂಭಿಸಿ (ಧ್ವನಿ)",
+        nav_dashboard: "ಮಾರಾಟಗಾರರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+        nav_live_demo: "⚡ ಲೈವ್ ಡೆಮೊ",
+        mob_home: "ಮುಖಪುಟ",
+        mob_explore: "ಹುಡುಕಿ",
+        mob_orders: "ಆರ್ಡರ್‌ಗಳು",
+        footer_sub: "ಕರ್ನಾಟಕ ಸೂಕ್ಷ್ಮ ವ್ಯಾಪಾರ ಮತ್ತು ವ್ಯಾಪಾರ ಪಾಸ್‌ಪೋರ್ಟ್ ವೇದಿಕೆ",
+        footer_no_gst: "ಜಿಎಸ್‌ಟಿ ಅಗತ್ಯವಿಲ್ಲ",
+        footer_zero_install: "ಆ್ಯಪ್ ಡೌನ್‌ಲೋಡ್ ಬೇಡ",
+        footer_direct_upi: "ನೇರ ಬ್ಯಾಂಕ್ ಯುಪಿಐ",
+        
+        // Landing
+        hero_badge: "ಕರ್ನಾಟಕದ ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳ ಮಹಿಳಾ ಮತ್ತು ಸಣ್ಣ ಉದ್ಯಮಿಗಳಿಗಾಗಿ ಧ್ವನಿ ಆಧಾರಿತ ವ್ಯಾಪಾರ",
+        hero_title_1: "ಮಾತನಾಡಿದರೆ ಸಾಕು,",
+        hero_title_2: "ನಿಮ್ಮ ಆನ್‌ಲೈನ್ ಅಂಗಡಿ ಸಿದ್ಧ!",
+        hero_sub: "ಯಾವುದೇ ಜಿಎಸ್‌ಟಿ ಬೇಡ, ಫೋಟೋ ಶೂಟ್ ಬೇಡ, ಆ್ಯಪ್ ಇನ್‌ಸ್ಟಾಲ್ ಬೇಡ. ನಿಮ್ಮ ಧ್ವನಿಯಿಂದ 1 ನಿಮಿಷದಲ್ಲಿ ಅಂಗಡಿ ತೆರೆಯಿರಿ, ಗ್ರಾಹಕರಿಂದ ನೇರ ಯುಪಿಐ ಪಾವತಿ ಪಡೆಯಿರಿ, ಮತ್ತು ಸಾಲ ಪಡೆಯಲು ವ್ಯಾಪಾರ ಪಾಸ್‌ಪೋರ್ಟ್ ರೂಪಿಸಿ.",
+        door_seller_title: "ನಾನು ಮಾರಾಟ ಮಾಡುತ್ತೇನೆ",
+        door_seller_desc: "ಧ್ವನಿಯಲ್ಲಿ ಮಾತನಾಡಿ ನಿಮ್ಮ ತಿಂಡಿ, ಮಸಾಲೆ, ಬಟ್ಟೆ ಅಥವಾ ಯಾವುದೇ ಸೇವೆಗಳ ಅಂಗಡಿ ತೆರೆಯಿರಿ",
+        door_seller_btn: "ಧ್ವನಿಯಿಂದ ಅಂಗಡಿ ತೆರೆಯಿರಿ →",
+        door_buyer_title: "ನಾನು ಖರೀದಿಸುತ್ತೇನೆ",
+        door_buyer_desc: "ಕರ್ನಾಟಕದ ಗೃಹಿಣಿಯರ ಅಪ್ಪಟ ಮನೆ ತಿಂಡಿ, ಮಸಾಲೆ, ಕರಕುಶಲ ವಸ್ತುಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಖರೀದಿಸಿ",
+        door_buyer_btn: "ಕರ್ನಾಟಕದ ಅಂಗಡಿಗಳನ್ನು ನೋಡಿ →",
+        feat_1_title: "ಧ್ವನಿ-ಟು-ಅಂಗಡಿ",
+        feat_1_desc: "ಕನ್ನಡ, ಇಂಗ್ಲಿಷ್ ಅಥವಾ ಹಿಂದಿಯಲ್ಲಿ ಮಾತನಾಡಿ ಅಂಗಡಿ ರಚಿಸಿ. ಯಾವುದೇ ಉತ್ಪನ್ನ ಅಥವಾ ಸೇವೆಯ ಪಟ್ಟಿಯನ್ನು ಸಿದ್ಧಪಡಿಸುತ್ತದೆ.",
+        feat_2_title: "ನೇರ ಯುಪಿಐ ಹಣ",
+        feat_2_desc: "ಯಾವುದೇ ಕಮಿಷನ್ ಇಲ್ಲ. ಖರೀದಿದಾರರಿಂದ ನೇರವಾಗಿ ನಿಮ್ಮ ಸ್ವಂತ ಗೂಗಲ್ ಪೇ, ಫೋನ್‌ಪೇ ಖಾತೆಗೆ 100% ಹಣ ಜಮೆ.",
+        feat_3_title: "ವ್ಯಾಪಾರ ಪಾಸ್‌ಪೋರ್ಟ್",
+        feat_3_desc: "ಪ್ರತಿ ಆರ್ಡರ್ ಲೆಡ್ಜರ್‌ನಲ್ಲಿ ದಾಖಲಾಗುತ್ತದೆ. ಬ್ಯಾಂಕ್‌ಗಳಿಂದ ಸುಲಭವಾಗಿ ಸಾಲ ಪಡೆಯಲು ಅಧಿಕೃತ ಪ್ರೊಫೈಲ್.",
+        featured_shops_title: "ಕರ್ನಾಟಕದ ಜನಪ್ರಿಯ ಮನೆ ಅಂಗಡಿಗಳು",
+        featured_shops_sub: "ಬೆಂಗಳೂರು, ಹುಬ್ಬಳ್ಳಿ, ಮೈಸೂರು, ಬೆಳಗಾವಿ, ಮಂಗಳೂರು ಹಾಗೂ ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳಿಂದ",
+        all_shops_btn: "ಎಲ್ಲಾ ಅಂಗಡಿಗಳು",
+
+        // Sell / Voice Studio Screen
+        voice_title: "ಧ್ವನಿಯಿಂದ ಹೊಸ ಅಂಗಡಿ ತೆರೆಯಿರಿ",
+        voice_sub: "ನಿಮ್ಮ ವ್ಯಾಪಾರ, ಉತ್ಪನ್ನಗಳು, ಬೆಲೆ ಅಥವಾ ಸೇವೆಗಳನ್ನು ಧ್ವನಿಯಲ್ಲಿ ಮಾತನಾಡಿ ಅಥವಾ ಟೈಪ್ ಮಾಡಿ",
+        voice_step1_badge: "ಹಂತ 1: ನಿಮ್ಮ ಧ್ವನಿಯಲ್ಲಿ ಮಾತನಾಡಿ",
+        voice_step1_title: "ನಿಮ್ಮ ವ್ಯಾಪಾರದ ಬಗ್ಗೆ ಧ್ವನಿಯಲ್ಲಿ ಹೇಳಿ",
+        speak_btn_idle: "ಮಾತನಾಡಲು ಒತ್ತಿರಿ (Speak Now)",
+        speak_btn_listening: "ಕೇಳಿಸಿಕೊಳ್ಳುತ್ತಿದ್ದೇವೆ... ಮಾತನಾಡಿ",
+        transcript_label: "ಲೈವ್ ಮಾತು / ಟೈಪ್ ಮಾಡಿ",
+        parse_btn: "ಪರಿಶೀಲಿಸಿ & ಉತ್ಪನ್ನಗಳನ್ನು ಹೊರತೆಗೆಯಿರಿ",
+        sample_prompts_title: "ಉದಾಹರಣೆ ಧ್ವನಿ ಪ್ರಾಂಪ್ಟ್‌ಗಳು (1-Click Test):",
+        voice_step2_title: "ಹೊರತೆಗೆಯಲಾದ ಉತ್ಪನ್ನಗಳು & ಸೇವೆಗಳ ಪಟ್ಟಿ",
+        voice_step2_sub: "ಬೆಲೆ, ಹೆಸರು ಬದಲಾಯಿಸಿ ಅಥವಾ ಹೊಸ ವಸ್ತುಗಳನ್ನು ಸೇರಿಸಿ",
+        add_custom_item_btn: "+ ಹೊಸ ಉತ್ಪನ್ನ ಸೇರಿಸಿ",
+        voice_step3_title: "ಅಂಗಡಿಯ ಪ್ರೊಫೈಲ್ & ನೇರ ಯುಪಿಐ ಮಾಹಿತಿ",
+        seller_phone_label: "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (10 ಅಂಕಿಗಳು) *",
+        seller_name_label: "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರು *",
+        seller_district_label: "ಕರ್ನಾಟಕ ಜಿಲ್ಲೆ (District) *",
+        seller_ward_label: "ಪ್ರದೇಶ / ಬಡಾವಣೆ (Locality / Area) *",
+        seller_upi_label: "ನೇರ ಹಣ ಪಡೆಯಲು UPI ID *",
+        publish_btn: "ಅಂಗಡಿ ಪ್ರಕಟಿಸಿ & ಲೈವ್ ಮಾಡಿ (Publish Storefront)",
+        live_preview_title: "ಅಂಗಡಿ ಲೈವ್ ಮುನ್ನೋಟ",
+        no_items_yet: "ಇನ್ನೂ ಯಾವುದೇ ಉತ್ಪನ್ನಗಳಿಲ್ಲ. ಮೇಲಿನ ಮೈಕ್ ಬಳಸಿ ಮಾತನಾಡಿ ಅಥವಾ ಕೆಳಗಿನ '+ ಹೊಸ ಉತ್ಪನ್ನ ಸೇರಿಸಿ' ಒತ್ತಿರಿ.",
+
+        // Discover Screen
+        discover_title: "ಕರ್ನಾಟಕದ ಮನೆ ಅಂಗಡಿಗಳನ್ನು ಹುಡುಕಿ",
+        discover_sub: "ಕರ್ನಾಟಕದ ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳ ಮಹಿಳಾ ಉದ್ಯಮಿಗಳು, ಗೃಹ ಉತ್ಪನ್ನಗಳು ಮತ್ತು ಸೇವೆಗಳು",
+        search_placeholder: "ಅಂಗಡಿ ಹೆಸರು, ಉತ್ಪನ್ನ (ಹೋಳಿಗೆ, ಮಸಾಲೆ, ರೊಟ್ಟಿ, ಸಾಫ್ಟ್‌ವೇರ್, ಬಟ್ಟೆ) ಅಥವಾ ಜಿಲ್ಲೆ ಹುಡುಕಿ...",
+        district_filter_label: "ಜಿಲ್ಲೆ ಆಯ್ಕೆ (Districts):",
+        category_filter_label: "ವಿಭಾಗಗಳು (Categories):",
+        all_districts: "ಎಲ್ಲಾ ಕರ್ನಾಟಕ",
+        all_categories: "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",
+        visit_shop_btn: "ಅಂಗಡಿಗೆ ಭೇಟಿ ನೀಡಿ →",
+        passport_btn: "ಪಾಸ್‌ಪೋರ್ಟ್",
+        no_shops_found: "ಯಾವುದೇ ಅಂಗಡಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+        clear_filters_btn: "ಫಿಲ್ಟರ್ ತೆರವುಗೊಳಿಸಿ",
+
+        // Dashboard Screen
+        dashboard_title: "ಮಾರಾಟಗಾರರ ಲೈವ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+        today_earnings: "ಇಂದಿನ ಗಳಿಕೆ",
+        today_orders: "ಇಂದಿನ ಆರ್ಡರ್‌ಗಳು",
+        active_products: "ಸಕ್ರಿಯ ಉತ್ಪನ್ನಗಳು",
+        consistency_score: "ವ್ಯಾಪಾರ ಸ್ಥಿರತೆ ಸ್ಕೋರ್",
+        orders_live_heading: "ಬಂದಿರುವ ಲೈವ್ ಆರ್ಡರ್‌ಗಳು",
+        catalogue_heading: "ಉತ್ಪನ್ನಗಳ ನಿರ್ವಹಣೆ",
+        add_product_btn: "+ ಉತ್ಪನ್ನ ಸೇರಿಸಿ",
+        in_stock_btn: "ಲಭ್ಯವಿದೆ",
+        out_of_stock_btn: "ಖಾಲಿಯಾಗಿದೆ",
+        mark_paid_btn: "ಪಾವತಿಯಾಗಿದೆ ✓",
+        mark_ready_btn: "ಸಿದ್ಧವಾಗಿದೆ 📦",
+        mark_delivered_btn: "ಡೆಲಿವರಿ ಆಗಿದೆ 🚚",
+        completed_status: "ಪೂರ್ಣಗೊಂಡಿದೆ ✓",
+
+        // Shop Screen
+        shop_products_heading: "ಲಭ್ಯವಿರುವ ತಾಜಾ ಉತ್ಪನ್ನಗಳು & ಸೇವೆಗಳು",
+        checkout_btn: "ಮುಂದುವರಿಯಿರಿ & ಪಾವತಿಸಿ (Checkout)",
+        cart_title: "ಆರ್ಡರ್ ಕಾರ್ಟ್ & ಪಾವತಿ",
+        buyer_name_label: "ನಿಮ್ಮ ಹೆಸರು *",
+        buyer_phone_label: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (WhatsApp) *",
+        fulfilment_label: "ಡೆಲಿವರಿ ವಿಧಾನ (Fulfilment)",
+        pickup_opt: "ಸ್ವತಃ ಪಡೆಯುವುದು (Pickup)",
+        rider_opt: "ಮನೆ ಬಾಗಿಲಿಗೆ ಡೆಲಿವರಿ (Rider Delivery)",
+        delivery_address_label: "ಡೆಲಿವರಿ ವಿಳಾಸ *",
+        pay_upi_btn: "ಯುಪಿಐ ಮೂಲಕ ಪಾವತಿಸಿ (Pay via UPI)",
+        i_have_paid_btn: "ನಾನು ಹಣ ಪಾವತಿಸಿದ್ದೇನೆ (Confirm Order)",
+
+        // Order Tracker & Receipt Modal
+        order_success_title: "🎉 ಆರ್ಡರ್ ಯಶಸ್ವಿಯಾಗಿ ದಾಖಲಾಗಿದೆ!",
+        order_success_sub: "ನಿಮ್ಮ ಆರ್ಡರ್ ನೇರವಾಗಿ ಅಂಗಡಿಯ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ತಲುಪಿದೆ.",
+        order_id_lbl: "ಆರ್ಡರ್ ಐಡಿ (Order ID):",
+        order_status_lbl: "ಲೈವ್ ಸ್ಥಿತಿ (Live Status):",
+        total_paid_lbl: "ಒಟ್ಟು ಪಾವತಿಸಿದ ಮೊತ್ತ:",
+        contact_seller_wa: "ಮಾರಾಟಗಾರರನ್ನು WhatsApp ನಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ",
+        download_bill_receipt: "ಬಿಲ್ ರಸೀದಿ ಡೌನ್‌ಲೋಡ್ (Print Receipt)",
+        view_live_dashboard: "ಮಾರಾಟಗಾರರ ಲೈವ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ನೋಡಿ",
+
+        // Passport Screen
+        passport_heading: "ಧ್ವನಿ ಪರಿಶೀಲಿತ ವ್ಯಾಪಾರ ಪಾಸ್‌ಪೋರ್ಟ್",
+        passport_sub_badge: "ಬ್ಯಾಂಕ್ ಸಾಲ-ಸಿದ್ಧ ವಹಿವಾಟು ಪ್ರೊಫೈಲ್",
+        passport_disclaimer: "ಬ್ಯಾಂಕ್ ಮತ್ತು ಸಾಲ ನೀಡುವ ಸಂಸ್ಥೆಗಳ ಮಾಹಿತಿ: ಈ ಪ್ರೊಫೈಲ್ ಧ್ವನಿ ಲೆಡ್ಜರ್‌ನಲ್ಲಿ ದಾಖಲಾದ ನೈಜ ವಹಿವಾಟು, ಗ್ರಾಹಕರ ಪುನರಾವರ್ತನೆ ಮತ್ತು ಸಾಪ್ತಾಹಿಕ ಪೂರೈಕೆಯ ಸ್ಥಿರತೆಯನ್ನು ತೋರಿಸುತ್ತದೆ.",
+        months_active: "ಸಕ್ರಿಯ ತಿಂಗಳುಗಳು",
+        total_sales: "ಒಟ್ಟು ಪರಿಶೀಲಿತ ಮಾರಾಟ",
+        avg_monthly_sales: "ಸರಾಸರಿ ಮಾಸಿಕ ಮಾರಾಟ",
+        repeat_customer_rate: "ಗ್ರಾಹಕರ ಪುನರಾವರ್ತನೆ ದರ",
+        weekly_trend_heading: "12-ವಾರದ ಪರಿಶೀಲಿತ ಮಾರಾಟ ಪ್ರವೃತ್ತಿ",
+        score_formula_heading: "ಪಾರದರ್ಶಕ ಕನ್ಸಿಸ್ಟೆನ್ಸಿ ಸ್ಕೋರ್ ಸೂತ್ರ",
+        download_pdf: "ಪಾಸ್‌ಪೋರ್ಟ್ ಡೌನ್‌ಲೋಡ್ (PDF)",
+        share_link: "ಪಾಸ್‌ಪೋರ್ಟ್ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ",
+
+        // Demo Screen
+        demo_title: "ಡ್ಯುಯಲ್ ಫೋನ್ ಲೈವ್ ಪ್ರಾತ್ಯಕ್ಷಿಕೆ (Live Demo)",
+        demo_sub: "ಬಲಬದಿಯ ಖರೀದಿದಾರರ ಫೋನ್‌ನಲ್ಲಿ ಆರ್ಡರ್ ಮಾಡಿ ಮತ್ತು ಎಡಬದಿಯ ಮಾರಾಟಗಾರರ ಫೋನ್‌ನಲ್ಲಿ ಶಬ್ದ ಮತ್ತು ಲೈವ್ ಆರ್ಡರ್ ಬರುವುದನ್ನು ನೋಡಿ!",
+        quick_test_order_btn: "⚡ 1-ಕ್ಲಿಕ್ ತ್ವರಿತ ಪರೀಕ್ಷಾ ಆರ್ಡರ್",
+        seller_phone_heading: "ಮಾರಾಟಗಾರರ ಫೋನ್",
+        buyer_phone_heading: "ಖರೀದಿದಾರರ ಫೋನ್",
+        order_one_tap: "1-ಟ್ಯಾಪ್ ಆರ್ಡರ್ 🛍️",
+      },
+
+      en: {
+        tagline: "Your voice. Your shop. • Karnataka",
+        nav_discover: "Discover & Buy",
+        nav_start_shop: "Start Shop (Voice)",
+        nav_dashboard: "Seller Dashboard",
+        nav_live_demo: "⚡ Live Demo",
+        mob_home: "Home",
+        mob_explore: "Discover",
+        mob_orders: "Orders",
+        footer_sub: "Karnataka Micro-Commerce & Business Passport Platform",
+        footer_no_gst: "No GST Needed",
+        footer_zero_install: "Zero App Install",
+        footer_direct_upi: "Direct Bank UPI",
+
+        // Landing
+        hero_badge: "Voice-First Micro-Commerce for Women & Micro-Entrepreneurs Across Karnataka",
+        hero_title_1: "Just speak.",
+        hero_title_2: "Your online storefront is ready!",
+        hero_sub: "No GST registration, no product photography, no app installs needed. Speak in Kannada, Hindi, or English to create your store, take instant UPI payments, and generate a lender-ready Business Passport.",
+        door_seller_title: "I Want to Sell",
+        door_seller_desc: "Speak about your homemade foods, spices, tailoring, crafts, or services to start selling immediately.",
+        door_seller_btn: "Open Store with Voice →",
+        door_buyer_title: "I'm Buying",
+        door_buyer_desc: "Discover authentic home kitchens, snacks, crafts, and services by women across Karnataka.",
+        door_buyer_btn: "Explore Karnataka Shops →",
+        feat_1_title: "Voice-to-Storefront",
+        feat_1_desc: "Build complete multi-product or service listings effortlessly by speaking in your mother tongue.",
+        feat_2_title: "Direct UPI Payments",
+        feat_2_desc: "Receive 100% of customer payments directly to your bank account with zero platform cuts.",
+        feat_3_title: "Business Passport",
+        feat_3_desc: "Automatically build a lender-ready track record and transparent Consistency Score for micro-credit.",
+        featured_shops_title: "Featured Karnataka Home Stores",
+        featured_shops_sub: "From Bengaluru, Hubballi, Mysuru, Belagavi, Mangaluru and across Karnataka districts",
+        all_shops_btn: "All Stores",
+
+        // Sell / Voice Studio Screen
+        voice_title: "Create Your Storefront with Voice",
+        voice_sub: "Speak or type about your products, prices, or business in Kannada, English, or Hindi",
+        voice_step1_badge: "Step 1: Speak in Your Voice",
+        voice_step1_title: "Tell Dhwani about your business & items",
+        speak_btn_idle: "Tap to Speak (Voice)",
+        speak_btn_listening: "Listening... speak now",
+        transcript_label: "Live Voice / Typed Transcript",
+        parse_btn: "Parse & Extract Items",
+        sample_prompts_title: "Sample Voice Prompts (1-Click Test):",
+        voice_step2_title: "Extracted Products & Services Catalogue",
+        voice_step2_sub: "Adjust prices, titles, or add custom items to your catalogue",
+        add_custom_item_btn: "+ Add Custom Item",
+        voice_step3_title: "Store Profile & Direct Bank UPI",
+        seller_phone_label: "Your Mobile Number (10 Digits) *",
+        seller_name_label: "Your Full Name *",
+        seller_district_label: "Karnataka District *",
+        seller_ward_label: "Locality / Area / Ward *",
+        seller_upi_label: "Your Direct Bank UPI ID *",
+        publish_btn: "Publish Storefront & Go Live",
+        live_preview_title: "Live Storefront Preview",
+        no_items_yet: "No items yet. Speak using the microphone above or tap '+ Add Custom Item' below.",
+
+        // Discover Screen
+        discover_title: "Discover Karnataka Home Stores & Services",
+        discover_sub: "Direct from women entrepreneurs and micro-businesses across Karnataka districts",
+        search_placeholder: "Search by shop name, item (Holige, Masala, Rotti, Software, Crafts) or district...",
+        district_filter_label: "Select District:",
+        category_filter_label: "Select Category:",
+        all_districts: "All Karnataka",
+        all_categories: "All Categories",
+        visit_shop_btn: "Visit Shop →",
+        passport_btn: "Passport",
+        no_shops_found: "No shops matched your search",
+        clear_filters_btn: "Clear Filters",
+
+        // Dashboard Screen
+        dashboard_title: "Live Seller Dashboard",
+        today_earnings: "Today's Earnings",
+        today_orders: "Today's Orders",
+        active_products: "Active Products",
+        consistency_score: "Consistency Score",
+        orders_live_heading: "Live Incoming Orders",
+        catalogue_heading: "Catalogue Management",
+        add_product_btn: "+ Add Product",
+        in_stock_btn: "In Stock",
+        out_of_stock_btn: "Out of Stock",
+        mark_paid_btn: "Mark Paid ✓",
+        mark_ready_btn: "Mark Ready 📦",
+        mark_delivered_btn: "Mark Delivered 🚚",
+        completed_status: "Completed ✓",
+
+        // Shop Screen
+        shop_products_heading: "Available Fresh Products & Offerings",
+        checkout_btn: "Proceed to Checkout",
+        cart_title: "Order Cart & Payment",
+        buyer_name_label: "Your Name *",
+        buyer_phone_label: "Mobile Number (WhatsApp) *",
+        fulfilment_label: "Fulfilment Option",
+        pickup_opt: "Self Pickup",
+        rider_opt: "Local Rider Delivery",
+        delivery_address_label: "Delivery Address *",
+        pay_upi_btn: "Pay via UPI App",
+        i_have_paid_btn: "I Have Paid (Confirm Order)",
+
+        // Order Tracker & Receipt Modal
+        order_success_title: "🎉 Order Placed & Paid Successfully!",
+        order_success_sub: "Your order has been transmitted live to the seller's dashboard.",
+        order_id_lbl: "Order Reference ID:",
+        order_status_lbl: "Live Fulfilment Tracker:",
+        total_paid_lbl: "Total Paid (UPI):",
+        contact_seller_wa: "Contact Seller on WhatsApp",
+        download_bill_receipt: "Print / Save Official Receipt",
+        view_live_dashboard: "Watch Live on Seller Dashboard",
+
+        // Passport Screen
+        passport_heading: "Dhwani Verified Business Passport",
+        passport_sub_badge: "LENDER-READY BUSINESS PROFILE",
+        passport_disclaimer: "Bank & Lender Transparency Note: This profile reflects verified customer transactions, repeat rate, and weekly fulfilment consistency recorded on the Dhwani micro-commerce ledger.",
+        months_active: "Months Active",
+        total_sales: "Total Verified Sales",
+        avg_monthly_sales: "Avg Monthly Sales",
+        repeat_customer_rate: "Repeat Customer Rate",
+        weekly_trend_heading: "12-Week Verified Sales Trend",
+        score_formula_heading: "Transparent Consistency Score Breakdown",
+        download_pdf: "Download Business Passport (PDF)",
+        share_link: "Share Passport Link",
+
+        // Demo Screen
+        demo_title: "Dual Phone Live Demonstration",
+        demo_sub: "Place an order on the Buyer Phone (Right) to watch it appear LIVE on the Seller Phone (Left) with audio chime & toast!",
+        quick_test_order_btn: "⚡ 1-Click Fast Test Order",
+        seller_phone_heading: "SELLER PHONE",
+        buyer_phone_heading: "BUYER PHONE",
+        order_one_tap: "Order 1-Tap 🛍️",
+      },
+
+      hi: {
+        tagline: "आपकी आवाज़। आपकी दुकान। • कर्नाटक",
+        nav_discover: "दुकानें देखें",
+        nav_start_shop: "दुकान शुरू करें (ध्वनि)",
+        nav_dashboard: "विक्रेता डैशबोर्ड",
+        nav_live_demo: "⚡ लाइव डेमो",
+        mob_home: "होम",
+        mob_explore: "खोजें",
+        mob_orders: "ऑर्डर",
+        footer_sub: "कर्नाटक सूक्ष्म व्यापार और बिज़नेस पासपोर्ट मंच",
+        footer_no_gst: "जीएसटी की आवश्यकता नहीं",
+        footer_zero_install: "बिना ऐप डाउनलोड",
+        footer_direct_upi: "सीधे बैंक यूपीआई",
+
+        // Landing
+        hero_badge: "कर्नाटक भर की महिला और सूक्ष्म उद्यमियों के लिए वॉइस-फर्स्ट डिजिटल दुकान",
+        hero_title_1: "बस बोलिए,",
+        hero_title_2: "आपकी ऑनलाइन दुकान तैयार!",
+        hero_sub: "बिना किसी जीएसटी, बिना फोटो शूट, बिना ऐप डाउनलोड किए सिर्फ अपनी आवाज़ से दुकान बनाएं, सीधे यूपीआई से भुगतान पाएं, और लोन के लिए बिज़नेस पासपोर्ट बनाएं।",
+        door_seller_title: "मैं बेचना चाहती हूँ",
+        door_seller_desc: "अपनी आवाज़ में बोलकर घर का खाना, मसाले, सिलाई या सेवाओं की दुकान तुरंत शुरू करें।",
+        door_seller_btn: "आवाज़ से दुकान बनाएं →",
+        door_buyer_title: "मैं खरीदना चाहता हूँ",
+        door_buyer_desc: "कर्नाटक की घरेलू रसोइयों, हस्तशिल्प और कारीगरों से सीधे शुद्ध चीजें खरीदें।",
+        door_buyer_btn: "कर्नाटक की दुकानें देखें →",
+        feat_1_title: "वॉइस-टू-स्टोरफ्रंट",
+        feat_1_desc: "कन्नड़, हिंदी या अंग्रेज़ी में बोलकर 1 मिनट में उत्पादों या सेवाओं की दुकान बनाएं।",
+        feat_2_title: "सीधे यूपीआई खाते में",
+        feat_2_desc: "ग्राहकों का 100% भुगतान सीधे आपके बैंक खाते में, बिना किसी कटौती के।",
+        feat_3_title: "बिज़नेस पासपोर्ट",
+        feat_3_desc: "लोन और क्रेडिट प्राप्त करने के लिए पारदर्शी निरंतरता स्कोर और सत्यापित खाता।",
+        featured_shops_title: "कर्नाटक की लोकप्रिय घरेलू दुकानें",
+        featured_shops_sub: "बेंगलुरु, हुबली, मैसूर, बेलगावी, मंगलुरु और कर्नाटक के सभी जिलों से",
+        all_shops_btn: "सभी दुकानें",
+
+        // Sell / Voice Studio Screen
+        voice_title: "वॉइस से नई दुकान बनाएं",
+        voice_sub: "कन्नड़, हिंदी या अंग्रेज़ी में अपने उत्पादों, कीमतों या सेवाओं के बारे में बोलें या लिखें",
+        voice_step1_badge: "चरण 1: अपनी आवाज़ में बोलें",
+        voice_step1_title: "अपने व्यापार के बारे में बताएं",
+        speak_btn_idle: "बोलने के लिए दबाएं (Speak)",
+        speak_btn_listening: "सुन रहे हैं... बोलिए",
+        transcript_label: "लाइव आवाज़ / लिखा हुआ टेक्स्ट",
+        parse_btn: "विश्लेषण करें और उत्पाद निकालें",
+        sample_prompts_title: "सैंपल आवाज़ प्रॉम्ट्स (1-Click Test):",
+        voice_step2_title: "निकाले गए उत्पाद और सेवाएं",
+        voice_step2_sub: "कीमत या नाम बदलें या नए उत्पाद जोड़ें",
+        add_custom_item_btn: "+ नया उत्पाद जोड़ें",
+        voice_step3_title: "दुकान प्रोफ़ाइल और डायरेक्ट यूपीआई",
+        seller_phone_label: "आपका मोबाइल नंबर (10 अंक) *",
+        seller_name_label: "आपका पूरा नाम *",
+        seller_district_label: "कर्नाटक जिला (District) *",
+        seller_ward_label: "क्षेत्र / इलाका (Locality / Area) *",
+        seller_upi_label: "डायरेक्ट बैंक UPI ID *",
+        publish_btn: "दुकान लाइव करें (Publish Storefront)",
+        live_preview_title: "लाइव दुकान पूर्वावलोकन",
+        no_items_yet: "अभी कोई उत्पाद नहीं है। ऊपर माइक से बोलें या नीचे '+ नया उत्पाद जोड़ें' पर क्लिक करें।",
+
+        // Discover Screen
+        discover_title: "कर्नाटक की घरेलू दुकानें और सेवाएं खोजें",
+        discover_sub: "कर्नाटक के सभी जिलों की महिला उद्यमियों और घरेलू व्यवसायों से सीधे",
+        search_placeholder: "दुकान का नाम, उत्पाद (होलिगे, मसाला, रोटी, सॉफ्टवेयर) या जिला खोजें...",
+        district_filter_label: "जिला चुनें (Districts):",
+        category_filter_label: "श्रेणी चुनें (Categories):",
+        all_districts: "पूरा कर्नाटक",
+        all_categories: "सभी श्रेणियां",
+        visit_shop_btn: "दुकान देखें →",
+        passport_btn: "पासपोर्ट",
+        no_shops_found: "कोई दुकान नहीं मिली",
+        clear_filters_btn: "फ़िल्टर हटाएं",
+
+        // Dashboard Screen
+        dashboard_title: "लाइव विक्रेता डैशबोर्ड",
+        today_earnings: "आज की कमाई",
+        today_orders: "आज के ऑर्डर",
+        active_products: "सक्रिय उत्पाद",
+        consistency_score: "कंसिस्टेंसी स्कोर",
+        orders_live_heading: "लाइव आ रहे ऑर्डर",
+        catalogue_heading: "कैटलॉग प्रबंधन",
+        add_product_btn: "+ उत्पाद जोड़ें",
+        in_stock_btn: "उपलब्ध",
+        out_of_stock_btn: "समाप्त",
+        mark_paid_btn: "भुगतान हुआ ✓",
+        mark_ready_btn: "तैयार है 📦",
+        mark_delivered_btn: "डिलीवर हुआ 🚚",
+        completed_status: "पूरा हुआ ✓",
+
+        // Shop Screen
+        shop_products_heading: "उपलब्ध ताज़ा उत्पाद और सेवाएं",
+        checkout_btn: "चेकआउट करें",
+        cart_title: "ऑर्डर कार्ट और भुगतान",
+        buyer_name_label: "आपका नाम *",
+        buyer_phone_label: "मोबाइल नंबर (WhatsApp) *",
+        fulfilment_label: "डिलीवरी विकल्प",
+        pickup_opt: "खुद लें (Self Pickup)",
+        rider_opt: "होम डिलीवरी (Rider)",
+        delivery_address_label: "डिलीवरी का पता *",
+        pay_upi_btn: "UPI से भुगतान करें",
+        i_have_paid_btn: "मैंने भुगतान कर दिया है (Confirm)",
+
+        // Order Tracker & Receipt Modal
+        order_success_title: "🎉 ऑर्डर सफलतापूर्वक दर्ज हुआ!",
+        order_success_sub: "आपका ऑर्डर सीधे विक्रेता डैशबोर्ड पर भेज दिया गया है।",
+        order_id_lbl: "ऑर्डर आईडी (Order ID):",
+        order_status_lbl: "लाइव ट्रैकर (Live Status):",
+        total_paid_lbl: "कुल भुगतान राशि:",
+        contact_seller_wa: "विक्रेता से WhatsApp पर बात करें",
+        download_bill_receipt: "रसीद डाउनलोड / प्रिंट करें",
+        view_live_dashboard: "विक्रेता डैशबोर्ड पर देखें",
+
+        // Passport Screen
+        passport_heading: "ध्वनि सत्यापित बिज़नेस पासपोर्ट",
+        passport_sub_badge: "बैंक लोन-सत्यापित बिज़नेस प्रोफ़ाइल",
+        passport_disclaimer: "बैंक और ऋण संस्थाओं के लिए सूचना: यह प्रोफ़ाइल ध्वनि लेज़र पर दर्ज सत्यापित ग्राहक लेनदेन, निरंतरता और सांख्यिकी को दर्शाती है।",
+        months_active: "सक्रिय महीने",
+        total_sales: "कुल सत्यापित बिक्री",
+        avg_monthly_sales: "औसत मासिक बिक्री",
+        repeat_customer_rate: "ग्राहक दोहराव दर",
+        weekly_trend_heading: "12-सप्ताह सत्यापित बिक्री ट्रेंड",
+        score_formula_heading: "पारदर्शी कंसिस्टेंसी स्कोर सूत्र",
+        download_pdf: "पासपोर्ट डाउनलोड करें (PDF)",
+        share_link: "पासपोर्ट लिंक शेयर करें",
+
+        // Demo Screen
+        demo_title: "डबल फोन लाइव प्रस्तुति (Live Demo)",
+        demo_sub: "दाएं खरीदार फोन पर ऑर्डर करें और बाएं विक्रेता फोन पर तुरंत लाइव ऑर्डर और आवाज़ देखें!",
+        quick_test_order_btn: "⚡ 1-क्लिक टेस्ट ऑर्डर",
+        seller_phone_heading: "विक्रेता फोन",
+        buyer_phone_heading: "ग्राहक फोन",
+        order_one_tap: "1-टैप ऑर्डर 🛍️",
+      }
+    };
+
+    let CURRENT_LANG = localStorage.getItem('dhwani_lang') || 'kn';
+
+    function setLanguage(lang) {
+      if (!I18N[lang]) lang = 'kn';
+      CURRENT_LANG = lang;
+      localStorage.setItem('dhwani_lang', lang);
+
+      const labels = { kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी' };
+      const lbl = document.getElementById('current-lang-label');
+      if (lbl) lbl.textContent = labels[lang] || 'ಕನ್ನಡ';
+
+      const dropdown = document.getElementById('lang-dropdown');
+      if (dropdown) dropdown.classList.add('hidden');
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[lang] && I18N[lang][key]) {
+          el.textContent = I18N[lang][key];
+        }
+      });
+
+      Router.handleRoute();
+    }
+
+    function t(key) {
+      return (I18N[CURRENT_LANG] && I18N[CURRENT_LANG][key]) || (I18N.en && I18N.en[key]) || key;
+    }
+
+    function toggleLangDropdown() {
+      const dropdown = document.getElementById('lang-dropdown');
+      if (dropdown) dropdown.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const container = document.getElementById('lang-menu-container');
+      if (container && !container.contains(e.target)) {
+        const dropdown = document.getElementById('lang-dropdown');
+        if (dropdown) dropdown.classList.add('hidden');
+      }
+    });
+  </script>
+
+  <!-- ====================================================================
+       7. UNIFIED KARNATAKA STATEWIDE STORE & SEED DATA
+  ==================================================================== -->
+  <script>
+    const DhwaniChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('dhwani_karnataka_realtime') : null;
+
+    const KARNATAKA_DISTRICTS = [
+      "Bengaluru Urban", "Hubballi-Dharwad", "Mysuru", "Belagavi", "Mangaluru (Dakshina Kannada)",
+      "Kalaburagi", "Shivamogga", "Udupi", "Ballari", "Davanagere", "Hassan", "Vijayapura",
+      "Tumakuru", "Bagalkote", "Chitradurga", "Mandya", "Raichur", "Bidar", "Kolar", "Kodagu"
+    ];
+
+    const KARNATAKA_CATEGORIES = [
+      "Sweets & Snacks", "Masalas & Podis", "Tiffin & Meals", "Home Bakery",
+      "Handicrafts & Tailoring", "Organic Produce", "Dairy & Ghee", "Tech & Digital Services", "Custom Services"
+    ];
+
+    const SEED_SELLERS = [
+      {
+        id: '11111111-1111-1111-1111-111111111111',
+        phone: '9845012345',
+        name: 'Renuka Patil',
+        shop_name: 'Renuka North Karnataka Holige Mane',
+        slug: 'renuka-holige',
+        district: 'Hubballi-Dharwad',
+        ward: 'Vidyanagar',
+        language: 'kn-IN',
+        upi_id: 'renukapatil@okhdfcbank',
+        category: 'Sweets & Snacks',
+        theme: { color: '#E8A317', tagline: 'Traditional Belagavi & Hubli Shenga Holige and Ghee Puran Poli' },
+        bio: 'Making authentic soft Shenga Holige and Bele Holige using 40-year-old family recipes in Vidyanagar.',
+        created_at: new Date(Date.now() - 90 * 86400000).toISOString(),
+        rating: 4.9,
+        reviews_count: 84
+      },
+      {
+        id: '22222222-2222-2222-2222-222222222222',
+        phone: '9480123456',
+        name: 'Sunita Kulkarni',
+        shop_name: 'Kulkarni Aaji Podi & Masala Kitchen',
+        slug: 'kulkarni-masala',
+        district: 'Belagavi',
+        ward: 'Tilakwadi',
+        language: 'kn-IN',
+        upi_id: 'sunitakulkarni@oksbi',
+        category: 'Masalas & Podis',
+        theme: { color: '#C8553D', tagline: 'Hand-ground chutney powders, Shenga Chutney & Rasam Masala' },
+        bio: 'Sun-dried, stone-ground traditional Karnataka podis without artificial preservatives.',
+        created_at: new Date(Date.now() - 75 * 86400000).toISOString(),
+        rating: 4.8,
+        reviews_count: 62
+      },
+      {
+        id: '33333333-3333-3333-3333-333333333333',
+        phone: '9900987654',
+        name: 'Shweta Rao',
+        shop_name: 'Mysuru Sandalwood & Traditional Silk Crafts',
+        slug: 'mysuru-crafts',
+        district: 'Mysuru',
+        ward: 'Gokulam',
+        language: 'kn-IN',
+        upi_id: 'shwetarao@paytm',
+        category: 'Handicrafts & Tailoring',
+        theme: { color: '#7E22CE', tagline: 'Handcrafted sandalwood artefacts and heritage Mysore silk pouches' },
+        bio: 'Handcrafted artisanal Mysore silk potlis, fragrant incense, and bridal accessories.',
+        created_at: new Date(Date.now() - 60 * 86400000).toISOString(),
+        rating: 4.9,
+        reviews_count: 53
+      },
+      {
+        id: '44444444-4444-4444-4444-444444444444',
+        phone: '9731234567',
+        name: 'Kavita Bhat',
+        shop_name: 'Karavali Coastal Flavours & Cashew Sweets',
+        slug: 'karavali-bhat',
+        district: 'Mangaluru (Dakshina Kannada)',
+        ward: 'Kadri',
+        language: 'kn-IN',
+        upi_id: 'kavitabhat@icici',
+        category: 'Sweets & Snacks',
+        theme: { color: '#D97706', tagline: 'Authentic Coastal Jackfruit Halwa, Cashew Macaroons & Mango Relish' },
+        bio: 'Home-made Mangalore cashew snacks, sun-dried jackfruit papads, and traditional coastal sweets.',
+        created_at: new Date(Date.now() - 45 * 86400000).toISOString(),
+        rating: 4.7,
+        reviews_count: 38
+      },
+      {
+        id: '55555555-5555-5555-5555-555555555555',
+        phone: '9611122334',
+        name: 'Savita Hiremath',
+        shop_name: 'Savita Jowar Rotti & Ennegai Kendra',
+        slug: 'savita-rotti',
+        district: 'Kalaburagi',
+        ward: 'Super Market Area',
+        language: 'kn-IN',
+        upi_id: 'savitahiremath@upi',
+        category: 'Tiffin & Meals',
+        theme: { color: '#1F5E4B', tagline: 'Crisp Kadak Jowar Rotti, Badanekayi Ennegai & Shenga Pudi' },
+        bio: 'Traditional North Karnataka thin Jowar Rottis and spicy stuffed brinjal curry.',
+        created_at: new Date(Date.now() - 80 * 86400000).toISOString(),
+        rating: 4.9,
+        reviews_count: 91
+      },
+      {
+        id: '66666666-6666-6666-6666-666666666666',
+        phone: '9886554433',
+        name: 'Nandini Hegde',
+        shop_name: 'Malnad Organic Spices & Wild Honey',
+        slug: 'malnad-organics',
+        district: 'Shivamogga',
+        ward: 'Thirthahalli Road',
+        language: 'kn-IN',
+        upi_id: 'nandinihegde@axisbank',
+        category: 'Organic Produce',
+        theme: { color: '#15803D', tagline: 'Single-origin Western Ghats Black Pepper, Cardamom & Raw Honey' },
+        bio: 'Estate-grown pure spices, Malnad kokum butter, and forest raw honey.',
+        created_at: new Date(Date.now() - 50 * 86400000).toISOString(),
+        rating: 4.8,
+        reviews_count: 47
+      },
+      {
+        id: '77777777-7777-7777-7777-777777777777',
+        phone: '9148332211',
+        name: 'Ananya Iyer',
+        shop_name: 'Bengaluru Millet Bakes & Filter Coffee Blends',
+        slug: 'anu-bakes',
+        district: 'Bengaluru Urban',
+        ward: 'Malleshwaram',
+        language: 'en-IN',
+        upi_id: 'ananyaiyer@okaxis',
+        category: 'Home Bakery',
+        theme: { color: '#0284C7', tagline: 'Gluten-free Ragi Brownies & Freshly Roasted Chicory Coffee' },
+        bio: 'Guilt-free artisanal bakery crafted with organic Karnataka millets and palm jaggery.',
+        created_at: new Date(Date.now() - 35 * 86400000).toISOString(),
+        rating: 4.9,
+        reviews_count: 29
+      },
+      {
+        id: '88888888-8888-8888-8888-888888888888',
+        phone: '9342778899',
+        name: 'Laxmi Angadi',
+        shop_name: 'Laxmi Wood-Pressed Oils & Heritage Pickles',
+        slug: 'laxmi-organics',
+        district: 'Bagalkote',
+        ward: 'Guledgudd',
+        language: 'kn-IN',
+        upi_id: 'laxmiangadi@sbi',
+        category: 'Organic Produce',
+        theme: { color: '#15803D', tagline: 'Traditional Ghani Groundnut & Sesame Oils with Sun Pickles' },
+        bio: 'Farm-sourced wood-pressed pure oils and grandmother recipe sun pickles.',
+        created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
+        rating: 4.8,
+        reviews_count: 34
+      }
+    ];
+
+    const SEED_LISTINGS = [
+      // Renuka
+      { id: 'l-1', seller_id: '11111111-1111-1111-1111-111111111111', title: 'Shenga Holige (Peanut Puran Poli)', price: 220, unit: 'pack of 10', category: 'Sweets & Snacks', description_local: 'ಶುದ್ಧ ತುಪ್ಪ ಮತ್ತು ಬೆಲ್ಲದ ಶೇಂಗಾ ಹೋಳಿಗೆ', description_en: 'Traditional crisp peanut stuffed sweet flatbread made with pure jaggery and ghee', available: true },
+      { id: 'l-2', seller_id: '11111111-1111-1111-1111-111111111111', title: 'Bele Holige (Chana Dal Poli)', price: 250, unit: 'pack of 10', category: 'Sweets & Snacks', description_local: 'ಮೃದುವಾದ ಕಡಲೆ ಬೇಳೆ ಹೋಳಿಗೆ', description_en: 'Soft chana dal puran poli with cardamom fragrance and pure cow ghee', available: true },
+      { id: 'l-3', seller_id: '11111111-1111-1111-1111-111111111111', title: 'Pure Desi Cow Ghee', price: 450, unit: '500 ml jar', category: 'Dairy & Ghee', description_local: 'ಮನೆಯಲ್ಲೇ ತಯಾರಿಸಿದ ಹಸುವಿನ ತುಪ್ಪ', description_en: 'Freshly churned aromatic clarified butter from local grass-fed cows', available: true },
+
+      // Sunita
+      { id: 'l-4', seller_id: '22222222-2222-2222-2222-222222222222', title: 'Spicy Shenga Chutney Pudi', price: 140, unit: '250g packet', category: 'Masalas & Podis', description_local: 'ಉತ್ತರ ಕರ್ನಾಟಕ ಶೈಲಿಯ ಖಾರದ ಶೇಂಗಾ ಪುಡಿ', description_en: 'Spicy roasted peanut garlic chutney powder for idli, dosa and jowar rotti', available: true },
+      { id: 'l-5', seller_id: '22222222-2222-2222-2222-222222222222', title: 'Agasi Chutney Pudi (Flaxseed)', price: 160, unit: '250g packet', category: 'Masalas & Podis', description_local: 'ಆರೋಗ್ಯಕರ ಅಗಸಿ ಬೀಜದ ಚಟ್ನಿ ಪುಡಿ', description_en: 'Omega-3 rich roasted flaxseed chutney powder with Byadgi chili', available: true },
+
+      // Shweta
+      { id: 'l-6', seller_id: '33333333-3333-3333-3333-333333333333', title: 'Handcrafted Mysore Silk Potli Bag', price: 340, unit: 'set of 2', category: 'Handicrafts & Tailoring', description_local: 'ಮೈಸೂರು ರೇಷ್ಮೆಯ ಸುಂದರ ಬ್ಯಾಗ್', description_en: 'Handwoven festive zari border gift bag handcrafted by local artisans', available: true },
+      { id: 'l-7', seller_id: '33333333-3333-3333-3333-333333333333', title: 'Natural Sandalwood Herbal Agarbatti', price: 180, unit: 'pack of 30 sticks', category: 'Handicrafts & Tailoring', description_local: 'ನೈಸರ್ಗಿಕ ಗಂಧದ ಅಗರಬತ್ತಿ', description_en: 'Aromatic natural Mysore sandalwood incense sticks made from essential oils', available: true },
+
+      // Kavita
+      { id: 'l-8', seller_id: '44444444-4444-4444-4444-444444444444', title: 'Mangalore Cashew Macaroons', price: 260, unit: '250g box', category: 'Sweets & Snacks', description_local: 'ಕರಾವಳಿ ಗೋಡಂಬಿ ಮ್ಯಾಕ್ರೂನ್', description_en: 'Light, crispy melt-in-mouth egg-free cashew nut treats', available: true },
+
+      // Savita
+      { id: 'l-9', seller_id: '55555555-5555-5555-5555-555555555555', title: 'Kadak Jowar Rotti Pack', price: 150, unit: 'pack of 10 rottis', category: 'Tiffin & Meals', description_local: 'ಗರಿಗರಿಯಾದ ಜೋಳದ ರೊಟ್ಟಿ', description_en: 'Crispy traditional North Karnataka sorghum flatbread with 3-month shelf life', available: true },
+
+      // Nandini
+      { id: 'l-10', seller_id: '66666666-6666-6666-6666-666666666666', title: 'Single-Origin Malnad Black Pepper', price: 290, unit: '250g jar', category: 'Organic Produce', description_local: 'ಮಲೆನಾಡಿನ ಶುದ್ಧ ಕಪ್ಪು ಮೆಣಸು', description_en: 'Sun-dried aromatic whole black pepper handpicked from Western Ghats estates', available: true },
+
+      // Ananya
+      { id: 'l-11', seller_id: '77777777-7777-7777-7777-777777777777', title: 'Ragi Dark Chocolate Brownies', price: 320, unit: 'box of 4 squares', category: 'Home Bakery', description_local: 'ರಾಗಿ ಮತ್ತು ಡಾರ್ಕ್ ಚಾಕೊಲೇಟ್ ಬ್ರೌನೀಸ್', description_en: 'Fudgy gluten-free finger-millet brownies sweetened with organic palm jaggery', available: true },
+
+      // Laxmi
+      { id: 'l-12', seller_id: '88888888-8888-8888-8888-888888888888', title: 'Wood-Pressed Groundnut Oil', price: 290, unit: '1 Litre bottle', category: 'Organic Produce', description_local: 'ಶುದ್ಧ ಮರದ ಗಾಣದ ಶೇಂಗಾ ಎಣ್ಣೆ', description_en: 'Cold-extracted unrefined peanut oil pressed in traditional wooden Ghani', available: true },
+    ];
+
+    function generate12WeekSeedOrders() {
+      const orders = [];
+      const seller1 = '11111111-1111-1111-1111-111111111111';
+      for (let w = 11; w >= 0; w--) {
+        const baseTime = Date.now() - (w * 7 * 86400000) - (2 * 86400000);
+        orders.push({
+          id: `ord-r1-${w}`,
+          seller_id: seller1,
+          listing_id: 'l-1',
+          items: [{ title: 'Shenga Holige (10 pcs)', price: 220, qty: 2 }],
+          buyer_name: 'Praveen Joshi',
+          buyer_phone: '9845110001',
+          qty: 2,
+          amount: 440,
+          status: 'delivered',
+          fulfilment: 'rider',
+          created_at: new Date(baseTime).toISOString()
+        });
+        orders.push({
+          id: `ord-r2-${w}`,
+          seller_id: seller1,
+          listing_id: 'l-2',
+          items: [{ title: 'Bele Holige', price: 250, qty: 1 }, { title: 'Pure Desi Cow Ghee', price: 450, qty: 1 }],
+          buyer_name: 'Suman Hegde',
+          buyer_phone: '9845110002',
+          qty: 2,
+          amount: 700,
+          status: 'delivered',
+          fulfilment: 'pickup',
+          created_at: new Date(baseTime + 86400000).toISOString()
+        });
+      }
+
+      orders.unshift({
+        id: `ord-live-1`,
+        seller_id: seller1,
+        listing_id: 'l-1',
+        items: [{ title: 'Shenga Holige (10 pcs)', price: 220, qty: 2 }, { title: 'Pure Desi Cow Ghee (500ml)', price: 450, qty: 1 }],
+        buyer_name: 'Aishwarya Kulkarni',
+        buyer_phone: '9845099887',
+        qty: 3,
+        amount: 890,
+        status: 'new',
+        fulfilment: 'rider',
+        delivery_address: 'Flat 302, Green Park Apartments, Vidyanagar, Hubballi',
+        created_at: new Date(Date.now() - 15 * 60000).toISOString()
+      });
+
+      orders.unshift({
+        id: `ord-live-2`,
+        seller_id: seller1,
+        listing_id: 'l-2',
+        items: [{ title: 'Bele Holige (10 pcs)', price: 250, qty: 2 }],
+        buyer_name: 'Girish Hatti',
+        buyer_phone: '9845011223',
+        qty: 2,
+        amount: 500,
+        status: 'paid',
+        fulfilment: 'pickup',
+        created_at: new Date(Date.now() - 50 * 60000).toISOString()
+      });
+
+      return orders;
+    }
+
+    const Store = {
+      isSupabaseLive: false,
+      supabaseClient: null,
+
+      init() {
+        // Enforce clean Karnataka statewide schema migration
+        if (localStorage.getItem('dhwani_version') !== '2.2') {
+          localStorage.setItem('dhwani_sellers', JSON.stringify(SEED_SELLERS));
+          localStorage.setItem('dhwani_listings', JSON.stringify(SEED_LISTINGS));
+          localStorage.setItem('dhwani_orders', JSON.stringify(generate12WeekSeedOrders()));
+          localStorage.setItem('dhwani_version', '2.2');
+        }
+
+        const cfg = window.DHWANI_CONFIG || {};
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceDemo = urlParams.get('demo') === '1';
+
+        const isRealKey = cfg.SUPABASE_URL && 
+                          !cfg.SUPABASE_URL.includes('your-project') && 
+                          cfg.SUPABASE_ANON_KEY && 
+                          !cfg.SUPABASE_ANON_KEY.includes('dummy') &&
+                          window.supabase;
+
+        if (isRealKey && !forceDemo) {
+          try {
+            this.supabaseClient = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+            this.isSupabaseLive = true;
+            const mb = document.getElementById('mode-badge');
+            const mt = document.getElementById('mode-text');
+            if (mb && mt) {
+              mb.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+              mt.textContent = "Supabase Live (Karnataka)";
+            }
+          } catch (e) {
+            this.initDemoStorage();
+          }
+        } else {
+          this.initDemoStorage();
+        }
+
+        if (DhwaniChannel) {
+          DhwaniChannel.onmessage = (ev) => {
+            if (ev.data && ev.data.type === 'NEW_ORDER') {
+              AudioEngine.playChime('order');
+              showToast(t('orders_live_heading'), `₹${ev.data.order.amount} from ${ev.data.order.buyer_name}`, 'order');
+              window.dispatchEvent(new CustomEvent('dhwani_order_received', { detail: ev.data.order }));
+            } else if (ev.data && ev.data.type === 'STATUS_UPDATED') {
+              window.dispatchEvent(new CustomEvent('dhwani_order_status_updated', { detail: ev.data }));
+            }
+          };
+        }
+
+        window.addEventListener('storage', (e) => {
+          if (e.key === 'dhwani_orders_last_update') {
+            window.dispatchEvent(new CustomEvent('dhwani_order_status_updated'));
+          }
+        });
+      },
+
+      initDemoStorage() {
+        this.isSupabaseLive = false;
+        let storedSellers = [];
+        try { storedSellers = JSON.parse(localStorage.getItem('dhwani_sellers') || '[]'); } catch(e) {}
+        
+        // Auto-migrate if empty, outdated, or lacking Karnataka districts
+        if (!Array.isArray(storedSellers) || storedSellers.length < 8 || !storedSellers.some(s => s.district === 'Hubballi-Dharwad')) {
+          localStorage.setItem('dhwani_sellers', JSON.stringify(SEED_SELLERS));
+          localStorage.setItem('dhwani_listings', JSON.stringify(SEED_LISTINGS));
+          localStorage.setItem('dhwani_orders', JSON.stringify(generate12WeekSeedOrders()));
+        } else {
+          storedSellers = storedSellers.map(s => ({
+            ...s,
+            district: s.district || 'Bengaluru Urban',
+            category: s.category || 'Sweets & Snacks',
+            shop_name: s.shop_name || 'Karnataka Store',
+            bio: s.bio || (s.theme && s.theme.tagline) || 'Authentic home kitchen and craft studio.',
+            name: s.name || 'Artisan Seller',
+            rating: s.rating || 4.9,
+            slug: s.slug || s.id || 'shop'
+          }));
+          localStorage.setItem('dhwani_sellers', JSON.stringify(storedSellers));
+        }
+
+        if (!localStorage.getItem('dhwani_listings')) {
+          localStorage.setItem('dhwani_listings', JSON.stringify(SEED_LISTINGS));
+        }
+        if (!localStorage.getItem('dhwani_orders')) {
+          localStorage.setItem('dhwani_orders', JSON.stringify(generate12WeekSeedOrders()));
+        }
+        const mb = document.getElementById('mode-badge');
+        const mt = document.getElementById('mode-text');
+        if (mb && mt) {
+          mb.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+          mt.textContent = "Demo Mode (Karnataka)";
+        }
+      },
+
+      async getSellers() {
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('sellers').select('*').order('created_at', { ascending: false });
+            if (!error && data && data.length > 0) return data;
+          } catch (e) {}
+        }
+        return JSON.parse(localStorage.getItem('dhwani_sellers') || '[]');
+      },
+
+      async getSellerBySlug(slug) {
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('sellers').select('*').eq('slug', slug).single();
+            if (!error && data) return data;
+          } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('dhwani_sellers') || '[]');
+        return list.find(s => s.slug === slug || s.id === slug) || null;
+      },
+
+      async createSeller(seller) {
+        if (!seller.id) seller.id = 'seller-' + Date.now();
+        if (!seller.created_at) seller.created_at = new Date().toISOString();
+        if (!seller.slug) seller.slug = seller.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `shop-${Date.now()}`;
+
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('sellers').insert([seller]).select().single();
+            if (!error && data) return data;
+          } catch (e) {}
+        }
+
+        const list = JSON.parse(localStorage.getItem('dhwani_sellers') || '[]');
+        const existingIdx = list.findIndex(s => s.phone === seller.phone || s.slug === seller.slug);
+        if (existingIdx >= 0) {
+          list[existingIdx] = { ...list[existingIdx], ...seller };
+        } else {
+          list.unshift(seller);
+        }
+        localStorage.setItem('dhwani_sellers', JSON.stringify(list));
+        return seller;
+      },
+
+      async getListings(sellerId) {
+        if (this.isSupabaseLive) {
+          try {
+            let q = this.supabaseClient.from('listings').select('*').order('created_at', { ascending: true });
+            if (sellerId) q = q.eq('seller_id', sellerId);
+            const { data, error } = await q;
+            if (!error && data) return data;
+          } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('dhwani_listings') || '[]');
+        if (sellerId) return list.filter(l => l.seller_id === sellerId);
+        return list;
+      },
+
+      async saveListing(listing) {
+        if (!listing.id) listing.id = 'listing-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4);
+        if (!listing.created_at) listing.created_at = new Date().toISOString();
+
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('listings').upsert([listing]).select().single();
+            if (!error && data) return data;
+          } catch (e) {}
+        }
+
+        const list = JSON.parse(localStorage.getItem('dhwani_listings') || '[]');
+        const idx = list.findIndex(l => l.id === listing.id);
+        if (idx >= 0) {
+          list[idx] = { ...list[idx], ...listing };
+        } else {
+          list.push(listing);
+        }
+        localStorage.setItem('dhwani_listings', JSON.stringify(list));
+        return listing;
+      },
+
+      async deleteListing(listingId) {
+        if (this.isSupabaseLive) {
+          try {
+            await this.supabaseClient.from('listings').delete().eq('id', listingId);
+          } catch (e) {}
+        }
+        let list = JSON.parse(localStorage.getItem('dhwani_listings') || '[]');
+        list = list.filter(l => l.id !== listingId);
+        localStorage.setItem('dhwani_listings', JSON.stringify(list));
+        return true;
+      },
+
+      async getOrders(sellerId) {
+        if (this.isSupabaseLive) {
+          try {
+            let q = this.supabaseClient.from('orders').select('*').order('created_at', { ascending: false });
+            if (sellerId) q = q.eq('seller_id', sellerId);
+            const { data, error } = await q;
+            if (!error && data) return data;
+          } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('dhwani_orders') || '[]');
+        if (sellerId) return list.filter(o => o.seller_id === sellerId);
+        return list;
+      },
+
+      async createOrder(order) {
+        if (!order.id) order.id = 'DHW-' + Math.floor(1000 + Math.random() * 9000);
+        if (!order.created_at) order.created_at = new Date().toISOString();
+        if (!order.status) order.status = 'paid';
+
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('orders').insert([order]).select().single();
+            if (!error && data) {
+              if (DhwaniChannel) DhwaniChannel.postMessage({ type: 'NEW_ORDER', order: data });
+              return data;
+            }
+          } catch (e) {}
+        }
+
+        const list = JSON.parse(localStorage.getItem('dhwani_orders') || '[]');
+        list.unshift(order);
+        localStorage.setItem('dhwani_orders', JSON.stringify(list));
+        localStorage.setItem('dhwani_orders_last_update', Date.now().toString());
+
+        if (DhwaniChannel) {
+          DhwaniChannel.postMessage({ type: 'NEW_ORDER', order });
+        }
+        return order;
+      },
+
+      async updateOrderStatus(orderId, newStatus) {
+        if (this.isSupabaseLive) {
+          try {
+            const { data, error } = await this.supabaseClient.from('orders').update({ status: newStatus }).eq('id', orderId).select().single();
+            if (!error && data) {
+              if (DhwaniChannel) DhwaniChannel.postMessage({ type: 'STATUS_UPDATED', orderId, status: newStatus });
+              return data;
+            }
+          } catch (e) {}
+        }
+
+        const list = JSON.parse(localStorage.getItem('dhwani_orders') || '[]');
+        const idx = list.findIndex(o => o.id === orderId);
+        if (idx >= 0) {
+          list[idx].status = newStatus;
+          localStorage.setItem('dhwani_orders', JSON.stringify(list));
+          localStorage.setItem('dhwani_orders_last_update', Date.now().toString());
+          if (DhwaniChannel) DhwaniChannel.postMessage({ type: 'STATUS_UPDATED', orderId, status: newStatus });
+          return list[idx];
+        }
+        return null;
+      },
+
+      async getPassport(sellerId) {
+        const seller = (await this.getSellers()).find(s => s.id === sellerId || s.slug === sellerId);
+        if (!seller) return null;
+
+        const allOrders = (await this.getOrders(seller.id)).filter(o => o.status !== 'cancelled');
+        const paidOrders = allOrders.filter(o => ['paid', 'ready', 'delivered'].includes(o.status));
+
+        const totalSales = paidOrders.reduce((sum, o) => sum + (parseFloat(o.amount) || 0), 0);
+        const totalOrders = paidOrders.length;
+
+        const buyerOrderCounts = {};
+        paidOrders.forEach(o => {
+          const ph = o.buyer_phone || 'unknown';
+          buyerOrderCounts[ph] = (buyerOrderCounts[ph] || 0) + 1;
+        });
+
+        const uniqueBuyersCount = Object.keys(buyerOrderCounts).length;
+        const repeatBuyersCount = Object.values(buyerOrderCounts).filter(c => c > 1).length;
+        const repeatRate = uniqueBuyersCount > 0 ? ((repeatBuyersCount / uniqueBuyersCount) * 100).toFixed(1) : 0;
+
+        const createdDate = new Date(seller.created_at || Date.now());
+        const monthsActive = Math.max(1, Math.ceil((Date.now() - createdDate.getTime()) / (30 * 86400000)));
+        const avgMonthlySales = (totalSales / monthsActive).toFixed(0);
+
+        const weeklyData = [];
+        let weeksWithSales = 0;
+        let recent4wSales = 0;
+        let prior4wSales = 0;
+
+        for (let i = 11; i >= 0; i--) {
+          const wStart = new Date(Date.now() - (i * 7 * 86400000));
+          const wEnd = new Date(Date.now() - ((i - 1) * 7 * 86400000));
+          const weekOrders = paidOrders.filter(o => {
+            const od = new Date(o.created_at);
+            return od >= wStart && od < wEnd;
+          });
+          const weekSales = weekOrders.reduce((sum, o) => sum + (parseFloat(o.amount) || 0), 0);
+          if (weekSales > 0) weeksWithSales++;
+
+          if (i <= 3) recent4wSales += weekSales;
+          else if (i <= 7) prior4wSales += weekSales;
+
+          weeklyData.push({
+            week_label: `W${12 - i}`,
+            date_label: wStart.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }),
+            sales: weekSales,
+            orders: weekOrders.length,
+          });
+        }
+
+        const scoreActiveRatio = Math.min(40, (weeksWithSales / 12) * 40);
+        const scoreVolume = Math.min(25, (totalSales / 25000) * 25);
+        const scoreRepeat = Math.min(20, (parseFloat(repeatRate) / 100) * 20);
+
+        let scoreGrowth = 10;
+        if (prior4wSales > 0) {
+          scoreGrowth = Math.min(15, (recent4wSales / prior4wSales) / 1.5 * 15);
+        } else if (recent4wSales > 0) {
+          scoreGrowth = 12;
+        }
+
+        const totalScore = Math.min(100, Math.max(0, Math.round(scoreActiveRatio + scoreVolume + scoreRepeat + scoreGrowth)));
+
+        return {
+          seller,
+          metrics: {
+            total_sales: totalSales,
+            total_orders: totalOrders,
+            months_active: monthsActive,
+            avg_monthly_sales: avgMonthlySales,
+            repeat_customers_count: repeatBuyersCount,
+            unique_buyers_count: uniqueBuyersCount,
+            repeat_rate_percent: repeatRate,
+            weeks_active_count: weeksWithSales,
+          },
+          consistency_score: {
+            total_score: totalScore,
+            breakdown: {
+              active_weeks_points: scoreActiveRatio.toFixed(1),
+              sales_volume_points: scoreVolume.toFixed(1),
+              repeat_customers_points: scoreRepeat.toFixed(1),
+              growth_trend_points: scoreGrowth.toFixed(1),
+            },
+            formula: 'Consistency Score (0-100) = 40% (Active Weeks Ratio) + 25% (Sales Volume ₹25k Scale) + 20% (Repeat Customer Rate) + 15% (Quarterly Growth Momentum)'
+          },
+          weekly_trend: weeklyData,
+          generated_at: new Date().toISOString(),
+        };
+      }
+    };
+
+    function getCategoryArtwork(category, title = '') {
+      const cat = (category || '').toLowerCase();
+      if (cat.includes('tech') || cat.includes('software') || cat.includes('digital') || cat.includes('app') || cat.includes('developer')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-sky-600 fill-current">
+          <circle cx="50" cy="50" r="38" fill="#E0F2FE" stroke="#0284C7" stroke-width="4"/>
+          <rect x="30" y="32" width="40" height="28" rx="4" fill="#0284C7"/>
+          <rect x="35" y="37" width="30" height="18" rx="2" fill="#FFFFFF"/>
+          <path d="M42 46 L46 43 L42 40 M50 47 L58 47" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M45 60 L55 60 M50 60 L50 66 M40 66 L60 66" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+        </svg>`;
+      }
+      if (cat.includes('sweet') || cat.includes('holige') || cat.includes('snack') || cat.includes('laddu') || cat.includes('halwa')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-dhwani-turmeric fill-current">
+          <circle cx="50" cy="50" r="38" fill="#FEF3C7" stroke="#E8A317" stroke-width="4"/>
+          <ellipse cx="50" cy="50" rx="28" ry="20" fill="#FDE68A"/>
+          <circle cx="42" cy="46" r="3" fill="#B45309"/>
+          <circle cx="58" cy="48" r="2.5" fill="#B45309"/>
+          <circle cx="50" cy="55" r="3" fill="#B45309"/>
+          <path d="M35 35 Q50 20 65 35" stroke="#E8A317" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>`;
+      }
+      if (cat.includes('masala') || cat.includes('podi') || cat.includes('pickle') || cat.includes('powder')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-dhwani-terracotta fill-current">
+          <circle cx="50" cy="50" r="38" fill="#FBEBE8" stroke="#C8553D" stroke-width="4"/>
+          <path d="M30 65 Q50 78 70 65 L65 42 L35 42 Z" fill="#C8553D"/>
+          <ellipse cx="50" cy="42" rx="15" ry="5" fill="#E8A317"/>
+          <path d="M48 24 L52 24 L54 40 L46 40 Z" fill="#78350F"/>
+          <circle cx="50" cy="20" r="4" fill="#78350F"/>
+        </svg>`;
+      }
+      if (cat.includes('tiffin') || cat.includes('rotti') || cat.includes('meal') || cat.includes('biryani') || cat.includes('kitchen')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-dhwani-green fill-current">
+          <circle cx="50" cy="50" r="38" fill="#E6F4F1" stroke="#1F5E4B" stroke-width="4"/>
+          <circle cx="50" cy="50" r="26" fill="#1F5E4B" fill-opacity="0.1" stroke="#1F5E4B" stroke-width="3"/>
+          <ellipse cx="50" cy="45" rx="16" ry="10" fill="#E8A317" fill-opacity="0.8"/>
+          <circle cx="38" cy="58" r="6" fill="#C8553D"/>
+          <circle cx="62" cy="58" r="6" fill="#15803D"/>
+        </svg>`;
+      }
+      if (cat.includes('craft') || cat.includes('tailor') || cat.includes('blouse') || cat.includes('silk') || cat.includes('saree')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-purple-700 fill-current">
+          <circle cx="50" cy="50" r="38" fill="#F3E8FF" stroke="#7E22CE" stroke-width="4"/>
+          <path d="M35 35 L65 35 L70 70 L30 70 Z" fill="#A855F7" fill-opacity="0.6" stroke="#7E22CE" stroke-width="3"/>
+          <path d="M42 35 Q50 20 58 35" fill="none" stroke="#7E22CE" stroke-width="3"/>
+          <circle cx="50" cy="52" r="4" fill="#E8A317"/>
+        </svg>`;
+      }
+      if (cat.includes('bake') || cat.includes('cake') || cat.includes('brownie') || cat.includes('coffee')) {
+        return `<svg viewBox="0 0 100 100" class="w-full h-full text-sky-600 fill-current">
+          <circle cx="50" cy="50" r="38" fill="#E0F2FE" stroke="#0284C7" stroke-width="4"/>
+          <path d="M32 65 L68 65 L65 48 L35 48 Z" fill="#BAE6FD" stroke="#0284C7" stroke-width="3"/>
+          <path d="M30 48 Q50 32 70 48" fill="#0284C7"/>
+          <circle cx="50" cy="30" r="4" fill="#C8553D"/>
+        </svg>`;
+      }
+      return `<svg viewBox="0 0 100 100" class="w-full h-full text-emerald-700 fill-current">
+        <circle cx="50" cy="50" r="38" fill="#DCFCE7" stroke="#15803D" stroke-width="4"/>
+        <path d="M50 25 C65 25 75 40 70 60 C65 75 50 78 50 78 C50 78 35 75 30 60 C25 40 35 25 50 25 Z" fill="#22C55E" fill-opacity="0.6" stroke="#15803D" stroke-width="3"/>
+        <path d="M50 30 L50 75" stroke="#15803D" stroke-width="2.5"/>
+      </svg>`;
+    }
+  </script>
+
+  <!-- ====================================================================
+       8. SMART ADAPTIVE NLP PARSER (FOOD, TECH, CRAFTS, SERVICES)
+  ==================================================================== -->
+  <script>
+    function parseAdaptiveVoiceListing(text, sellerName = '', district = 'Bengaluru Urban') {
+      const clean = text.toLowerCase().trim();
+      const items = [];
+
+      let category = 'Sweets & Snacks';
+      let themeColor = '#1F5E4B';
+      let defaultTitle = 'Specialty Product';
+
+      if (clean.includes('software') || clean.includes('tech') || clean.includes('developer') || clean.includes('app') || clean.includes('website') || clean.includes('it company')) {
+        category = 'Tech & Digital Services';
+        themeColor = '#0284C7';
+        defaultTitle = 'Custom Software Service';
+      } else if (clean.includes('tailor') || clean.includes('blouse') || clean.includes('embroidery') || clean.includes('saree') || clean.includes('craft') || clean.includes('potli')) {
+        category = 'Handicrafts & Tailoring';
+        themeColor = '#7E22CE';
+        defaultTitle = 'Handmade Artisanal Item';
+      } else if (clean.includes('masala') || clean.includes('podi') || clean.includes('powder') || clean.includes('pickle') || clean.includes('chutney')) {
+        category = 'Masalas & Podis';
+        themeColor = '#C8553D';
+        defaultTitle = 'Handcrafted Masala Podi';
+      } else if (clean.includes('cake') || clean.includes('brownie') || clean.includes('bake') || clean.includes('cookie') || clean.includes('coffee')) {
+        category = 'Home Bakery';
+        themeColor = '#D97706';
+        defaultTitle = 'Artisanal Home Bake';
+      } else if (clean.includes('rotti') || clean.includes('jowar') || clean.includes('tiffin') || clean.includes('biryani') || clean.includes('meal') || clean.includes('catering')) {
+        category = 'Tiffin & Meals';
+        themeColor = '#1F5E4B';
+        defaultTitle = 'Fresh Traditional Food';
+      } else if (clean.includes('oil') || clean.includes('honey') || clean.includes('pepper') || clean.includes('organic') || clean.includes('ghee')) {
+        category = 'Organic Produce';
+        themeColor = '#15803D';
+        defaultTitle = 'Pure Organic Produce';
+      }
+
+      const clauses = clean.split(/[,;\.\n]+|\band\b|\bmattu\b|\baur\b/gi).map(s => s.trim()).filter(Boolean);
+
+      for (const clause of clauses) {
+        const priceMatch = clause.match(/(?:rs\.?|inr|₹)?\s*(\d+)\s*(?:rupees?|rs\.?|rupayi|\/-)?/i);
+        const price = priceMatch ? parseInt(priceMatch[1], 10) : (category === 'Tech & Digital Services' ? 1500 : 220);
+
+        let unit = category === 'Tech & Digital Services' ? 'per project' : 'packet';
+        if (clause.includes('half kg') || clause.includes('500g')) unit = 'half kg';
+        else if (clause.includes('1 kg') || clause.includes('1kg')) unit = '1 kg';
+        else if (clause.includes('dozen')) unit = 'dozen';
+        else if (clause.includes('hour') || clause.includes('hourly')) unit = 'per hour';
+        else if (clause.includes('month') || clause.includes('monthly')) unit = 'per month';
+        else if (clause.includes('piece') || clause.includes('pc')) unit = 'piece';
+        else if (clause.includes('jar') || clause.includes('bottle')) unit = '500ml jar';
+        else if (clause.includes('box')) unit = 'box';
+
+        let rawTitle = clause
+          .replace(/\d+/g, '')
+          .replace(/(?:rupees?|rs\.?|kg|g|packet|pack|half|per|\/-|hello|this is|want to open|nanna hattira|mera|meri|a software company|an it company)/gi, '')
+          .trim();
+
+        let title = '';
+        if (rawTitle.length > 2) {
+          title = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+        } else {
+          title = category === 'Tech & Digital Services' ? 'Software & Web Consultation' : defaultTitle;
+        }
+
+        if (!items.some(i => i.title.toLowerCase() === title.toLowerCase())) {
+          items.push({
+            id: 'item-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+            title,
+            price,
+            unit,
+            category,
+            description_local: `${title} - ಶುದ್ಧ ಮತ್ತು ವಿಶ್ವಾಸಾರ್ಹ ಸೇವೆ / ಉತ್ಪನ್ನ`,
+            description_en: `High quality customized ${title} crafted with care`,
+          });
+        }
+      }
+
+      if (items.length === 0) {
+        items.push({
+          id: 'item-' + Date.now() + '-1',
+          title: category === 'Tech & Digital Services' ? 'Web & App Development Service' : 'Handcrafted Specialty Product',
+          price: category === 'Tech & Digital Services' ? 1500 : 250,
+          unit: category === 'Tech & Digital Services' ? 'per project' : 'pack',
+          category,
+          description_local: 'ವಿಶ್ವಾಸಾರ್ಹ ಗುಣಮಟ್ಟದ ಕೊಡುಗೆ',
+          description_en: 'Reliable and authentic offering crafted for you',
+        });
+      }
+
+      const shopName = sellerName ? `${sellerName}'s ${category.split('&')[0].trim()} Studio` : `Dhwani ${category.split('&')[0].trim()} Store`;
+
+      return {
+        shop_name: shopName,
+        category,
+        district: district || 'Bengaluru Urban',
+        bio: `Dedicated to delivering authentic, top-quality offerings directly across Karnataka.`,
+        theme_color: themeColor,
+        items
+      };
+    }
+  </script>
+
+  <!-- ====================================================================
+       9. ROUTER & SCREEN IMPLEMENTATIONS
+  ==================================================================== -->
+  <script>
+    const Router = {
+      currentRoute: '',
+
+      init() {
+        window.addEventListener('hashchange', () => this.handleRoute());
+        this.handleRoute();
+      },
+
+      navigate(hash) {
+        window.location.hash = hash;
+      },
+
+      async handleRoute() {
+        const hash = window.location.hash || '#/';
+        this.currentRoute = hash;
+        const app = document.getElementById('app');
+        if (!app) return;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (hash === '#/' || hash === '#' || hash === '') {
+          app.innerHTML = renderLandingScreen();
+        } else if (hash.startsWith('#/sell')) {
+          app.innerHTML = renderVoiceStudioScreen();
+          initVoiceStudioEvents();
+        } else if (hash.startsWith('#/dashboard')) {
+          app.innerHTML = await renderDashboardScreen();
+          initDashboardEvents();
+        } else if (hash.startsWith('#/shop/')) {
+          const slug = hash.replace('#/shop/', '').split('?')[0];
+          app.innerHTML = await renderShopScreen(slug);
+          initShopEvents(slug);
+        } else if (hash.startsWith('#/discover')) {
+          app.innerHTML = await renderDiscoverScreen();
+        } else if (hash.startsWith('#/passport/')) {
+          const slug = hash.replace('#/passport/', '').split('?')[0];
+          app.innerHTML = await renderPassportScreen(slug);
+          initPassportEvents(slug);
+        } else if (hash.startsWith('#/demo')) {
+          app.innerHTML = await renderSplitScreenDemo();
+          initSplitScreenEvents();
+        } else {
+          app.innerHTML = `<div class="text-center py-20">
+            <h2 class="text-2xl font-bold text-dhwani-ink">Screen Not Found</h2>
+            <a href="#/" class="inline-block mt-4 px-6 py-2.5 bg-dhwani-green text-white rounded-xl font-bold">Return Home</a>
+          </div>`;
+        }
+
+        lucide.createIcons();
+      }
+    };
+
+    // ====================================================================
+    // SCREEN 1: LANDING PAGE (#/)
+    // ====================================================================
+    function renderLandingScreen() {
+      return `
+        <div class="space-y-12">
+          <!-- Hero Banner with Soundwave Theme -->
+          <div class="relative overflow-hidden rounded-30 bg-gradient-to-br from-dhwani-cream via-white to-dhwani-turmericLight/30 border border-dhwani-border p-6 sm:p-12 shadow-soft">
+            <div class="absolute -right-16 -top-16 w-80 h-80 bg-dhwani-turmeric/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-16 -bottom-16 w-80 h-80 bg-dhwani-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-3xl mx-auto text-center space-y-6">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-dhwani-border shadow-xs text-xs font-bold text-dhwani-green">
+                <div class="flex items-center gap-1">
+                  <span class="soundwave-bar h-3 bg-dhwani-turmeric animate-pulse"></span>
+                  <span class="soundwave-bar h-5 bg-dhwani-terracotta animate-pulse"></span>
+                  <span class="soundwave-bar h-3 bg-dhwani-green animate-pulse"></span>
+                </div>
+                <span>${t('hero_badge')}</span>
+              </div>
+
+              <h1 class="text-4xl sm:text-6xl font-bold text-dhwani-ink tracking-tight leading-[1.15]">
+                <span class="text-dhwani-green block">${t('hero_title_1')}</span>
+                <span class="bg-gradient-to-r from-dhwani-terracotta to-dhwani-turmeric bg-clip-text text-transparent">${t('hero_title_2')}</span>
+              </h1>
+
+              <p class="text-base sm:text-lg text-dhwani-muted leading-relaxed max-w-2xl mx-auto">
+                ${t('hero_sub')}
+              </p>
+
+              <!-- Two Doors -->
+              <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                <a href="#/sell" class="group flex flex-col items-start p-5 bg-gradient-to-br from-dhwani-green to-dhwani-greenDark text-white rounded-20 shadow-card hover:shadow-glow transform hover:-translate-y-1 transition duration-200 text-left">
+                  <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                    <i data-lucide="mic" class="w-5 h-5 text-dhwani-turmeric"></i>
+                  </div>
+                  <h3 class="font-bold text-lg text-white">${t('door_seller_title')}</h3>
+                  <p class="text-xs text-white/80 mt-1">${t('door_seller_desc')}</p>
+                  <span class="mt-4 text-xs font-bold text-dhwani-turmeric flex items-center gap-1 group-hover:translate-x-1 transition">${t('door_seller_btn')}</span>
+                </a>
+
+                <a href="#/discover" class="group flex flex-col items-start p-5 bg-white text-dhwani-ink border border-dhwani-border rounded-20 shadow-soft hover:border-dhwani-turmeric transform hover:-translate-y-1 transition duration-200 text-left">
+                  <div class="w-10 h-10 rounded-xl bg-dhwani-cream flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-dhwani-terracotta"></i>
+                  </div>
+                  <h3 class="font-bold text-lg text-dhwani-ink">${t('door_buyer_title')}</h3>
+                  <p class="text-xs text-dhwani-muted mt-1">${t('door_buyer_desc')}</p>
+                  <span class="mt-4 text-xs font-bold text-dhwani-green flex items-center gap-1 group-hover:translate-x-1 transition">${t('door_buyer_btn')}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Impact Pillars -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-20 border border-dhwani-border shadow-xs">
+              <div class="w-12 h-12 rounded-2xl bg-dhwani-turmeric/10 flex items-center justify-center text-dhwani-turmericDark mb-4">
+                <i data-lucide="sparkles" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-bold text-lg text-dhwani-ink">${t('feat_1_title')}</h3>
+              <p class="text-xs sm:text-sm text-dhwani-muted mt-1.5 leading-relaxed">${t('feat_1_desc')}</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-20 border border-dhwani-border shadow-xs">
+              <div class="w-12 h-12 rounded-2xl bg-dhwani-green/10 flex items-center justify-center text-dhwani-green mb-4">
+                <i data-lucide="qr-code" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-bold text-lg text-dhwani-ink">${t('feat_2_title')}</h3>
+              <p class="text-xs sm:text-sm text-dhwani-muted mt-1.5 leading-relaxed">${t('feat_2_desc')}</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-20 border border-dhwani-border shadow-xs">
+              <div class="w-12 h-12 rounded-2xl bg-dhwani-terracotta/10 flex items-center justify-center text-dhwani-terracotta mb-4">
+                <i data-lucide="award" class="w-6 h-6"></i>
+              </div>
+              <h3 class="font-bold text-lg text-dhwani-ink">${t('feat_3_title')}</h3>
+              <p class="text-xs sm:text-sm text-dhwani-muted mt-1.5 leading-relaxed">${t('feat_3_desc')}</p>
+            </div>
+          </div>
+
+          <!-- Featured Stores Across Karnataka -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-2xl font-bold text-dhwani-ink">${t('featured_shops_title')}</h2>
+                <p class="text-xs text-dhwani-muted">${t('featured_shops_sub')}</p>
+              </div>
+              <a href="#/discover" class="text-sm font-bold text-dhwani-green hover:underline flex items-center gap-1">
+                <span>${t('all_shops_btn')}</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              ${SEED_SELLERS.slice(0, 4).map(s => `
+                <div class="bg-white rounded-20 border border-dhwani-border p-4 shadow-xs hover:shadow-card transition flex flex-col justify-between">
+                  <div class="space-y-2.5">
+                    <div class="flex items-center justify-between">
+                      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-dhwani-cream text-dhwani-green border border-dhwani-border/60">
+                        📍 ${s.district}
+                      </span>
+                      <span class="text-xs font-bold text-amber-600 flex items-center gap-1">
+                        ★ ${s.rating}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-sm text-dhwani-ink line-clamp-1">${s.shop_name}</h4>
+                      <p class="text-xs text-dhwani-muted line-clamp-2 mt-1">${s.bio}</p>
+                    </div>
+                  </div>
+                  <div class="pt-3 border-t border-dhwani-border/50 flex items-center justify-between">
+                    <a href="#/shop/${s.slug}" class="text-xs font-bold text-dhwani-green hover:underline">${t('visit_shop_btn')}</a>
+                    <a href="#/passport/${s.slug}" class="text-[11px] text-dhwani-terracotta hover:underline font-bold">${t('passport_btn')}</a>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ====================================================================
+    // SCREEN 2: VOICE STUDIO & ITEM CUSTOMIZER (#/sell)
+    // ====================================================================
+    let voiceState = {
+      isRecording: false,
+      recognition: null,
+      audioCtx: null,
+      analyser: null,
+      dataArray: null,
+      animFrame: null,
+      activeVoiceLang: 'kn-IN',
+      items: [],
+      shopName: '',
+      category: 'Sweets & Snacks',
+      district: 'Bengaluru Urban',
+      ward: 'Indiranagar',
+      phone: localStorage.getItem('dhwani_seller_phone') || '',
+      sellerName: '',
+      upiId: '',
+    };
+
+    function renderVoiceStudioScreen() {
+      return `
+        <div class="max-w-5xl mx-auto space-y-8">
+          <!-- Screen Header -->
+          <div class="text-center space-y-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-dhwani-turmericLight text-dhwani-turmericDark border border-dhwani-turmeric/40">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>${t('voice_step1_badge')}</span>
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-bold text-dhwani-ink">${t('voice_title')}</h1>
+            <p class="text-sm text-dhwani-muted max-w-xl mx-auto">${t('voice_sub')}</p>
+          </div>
+
+          <!-- 3-STEP INTERACTIVE VOICE ONBOARDING WORKSPACE -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LEFT: VOICE STUDIO RECORDER & TRANSCRIPT (5 Cols) -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="bg-white p-6 rounded-30 border border-dhwani-border shadow-soft flex flex-col items-center text-center space-y-5">
+                
+                <h3 class="text-sm font-bold text-dhwani-ink uppercase tracking-wider">${t('voice_step1_title')}</h3>
+
+                <!-- Language Chips for Speech Recognition -->
+                <div class="flex items-center gap-1.5 p-1 bg-dhwani-cream rounded-xl border border-dhwani-border text-xs font-bold">
+                  <button type="button" onclick="setVoiceEngineLang('kn-IN')" id="vlang-kn" class="px-3 py-1 rounded-lg ${voiceState.activeVoiceLang === 'kn-IN' ? 'bg-dhwani-green text-white' : 'text-dhwani-ink'} transition">ಕನ್ನಡ</button>
+                  <button type="button" onclick="setVoiceEngineLang('en-IN')" id="vlang-en" class="px-3 py-1 rounded-lg ${voiceState.activeVoiceLang === 'en-IN' ? 'bg-dhwani-green text-white' : 'text-dhwani-ink'} transition">English</button>
+                  <button type="button" onclick="setVoiceEngineLang('hi-IN')" id="vlang-hi" class="px-3 py-1 rounded-lg ${voiceState.activeVoiceLang === 'hi-IN' ? 'bg-dhwani-green text-white' : 'text-dhwani-ink'} transition">हिन्दी</button>
+                </div>
+
+                <!-- BIG MIC BUTTON -->
+                <div class="relative py-2 flex items-center justify-center">
+                  <div id="mic-pulse-ring" class="hidden absolute w-36 h-36 rounded-full bg-dhwani-turmeric/30 animate-pulse-ring pointer-events-none"></div>
+                  
+                  <button id="mic-trigger-btn" onclick="toggleVoiceRecording()" class="relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-dhwani-turmeric to-dhwani-terracotta text-white shadow-glow flex flex-col items-center justify-center transform hover:scale-105 active:scale-95 transition-all focus:outline-none" aria-label="Microphone record button">
+                    <i id="mic-icon" data-lucide="mic" class="w-10 h-10"></i>
+                  </button>
+                </div>
+
+                <!-- Live Audio Level Bars -->
+                <div class="w-full flex items-center justify-center gap-1.5 h-8 px-4" id="audio-waveform-bars">
+                  <span class="soundwave-bar h-2 bg-dhwani-turmeric"></span>
+                  <span class="soundwave-bar h-3 bg-dhwani-turmeric"></span>
+                  <span class="soundwave-bar h-4 bg-dhwani-terracotta"></span>
+                  <span class="soundwave-bar h-5 bg-dhwani-green"></span>
+                  <span class="soundwave-bar h-3 bg-dhwani-green"></span>
+                  <span class="soundwave-bar h-2 bg-dhwani-green"></span>
+                </div>
+
+                <div id="mic-status-label" class="text-xs font-bold text-dhwani-muted">
+                  ${t('speak_btn_idle')}
+                </div>
+
+                <!-- Live Speech / Text Area -->
+                <div class="w-full text-left space-y-1.5">
+                  <label class="block text-xs font-bold text-dhwani-ink">${t('transcript_label')}</label>
+                  <div class="relative">
+                    <textarea id="voice-transcript-area" rows="3" placeholder="Speak or type: 'I sell homemade filter coffee powder 220 rupees and ragi brownies 320 rupees box'..." class="w-full text-xs font-medium text-dhwani-ink bg-dhwani-cream/60 border border-dhwani-border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric"></textarea>
+                    <button onclick="handleParseVoiceTranscript()" class="absolute bottom-2.5 right-2.5 px-3 py-1.5 bg-dhwani-green text-white text-[11px] font-bold rounded-lg hover:bg-dhwani-greenDark transition">
+                      ${t('parse_btn')}
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Quick Prompts Across Karnataka -->
+                <div class="w-full pt-3 border-t border-dhwani-border/60 text-left space-y-2">
+                  <span class="text-[11px] font-bold text-dhwani-muted">${t('sample_prompts_title')}</span>
+                  <div class="flex flex-col gap-1.5">
+                    <button onclick="injectVoicePrompt('Bengaluru Fresh Ragi Brownies 320 rupees box, and Filter Coffee Powder 220 rupees pack')" class="text-left text-xs p-2 bg-dhwani-cream/80 hover:bg-dhwani-cream rounded-xl text-dhwani-ink border border-dhwani-border/60 transition">
+                      ✨ "Bengaluru Ragi Brownies 320 rupees and Filter Coffee Powder 220 rupees"
+                    </button>
+                    <button onclick="injectVoicePrompt('Mangalore Cashew Macaroons 260 rupees and Jackfruit Halwa 240 rupees pack')" class="text-left text-xs p-2 bg-dhwani-cream/80 hover:bg-dhwani-cream rounded-xl text-dhwani-ink border border-dhwani-border/60 transition">
+                      ✨ "Mangalore Cashew Macaroons 260 rupees and Jackfruit Halwa 240 rupees"
+                    </button>
+                    <button onclick="injectVoicePrompt('Custom Web and Mobile App Development Consultation 1500 rupees per project')" class="text-left text-xs p-2 bg-dhwani-cream/80 hover:bg-dhwani-cream rounded-xl text-dhwani-ink border border-dhwani-border/60 transition">
+                      ✨ "Custom Web and Mobile App Development Consultation 1500 rupees"
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: DYNAMIC ITEM CUSTOMIZER & STORE PROFILE (7 Cols) -->
+            <div class="lg:col-span-7 space-y-6">
+              
+              <!-- STEP 2: Extracted Items Customizer -->
+              <div class="bg-white p-6 rounded-30 border border-dhwani-border shadow-soft space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-dhwani-border">
+                  <div>
+                    <h3 class="font-bold text-base text-dhwani-ink">${t('voice_step2_title')}</h3>
+                    <p class="text-xs text-dhwani-muted">${t('voice_step2_sub')}</p>
+                  </div>
+                  <button onclick="openAddNewCustomItemModal()" class="px-3 py-1.5 bg-dhwani-green hover:bg-dhwani-greenDark text-white rounded-xl text-xs font-bold shadow-xs transition">
+                    ${t('add_custom_item_btn')}
+                  </button>
+                </div>
+
+                <div id="voice-items-catalogue-container" class="space-y-3">
+                  ${renderVoiceItemsList()}
+                </div>
+              </div>
+
+              <!-- STEP 3: Store Details & Direct Bank UPI -->
+              <div class="bg-white p-6 rounded-30 border border-dhwani-border shadow-soft space-y-4 text-left">
+                <h3 class="font-bold text-base text-dhwani-ink pb-2 border-b border-dhwani-border">${t('voice_step3_title')}</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('seller_name_label')}</label>
+                    <input type="text" id="voice-seller-name" value="${voiceState.sellerName}" placeholder="e.g. Renuka Patil" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('seller_phone_label')}</label>
+                    <input type="tel" id="voice-seller-phone" value="${voiceState.phone}" maxlength="10" placeholder="9845012345" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('seller_district_label')}</label>
+                    <select id="voice-seller-district" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric">
+                      ${KARNATAKA_DISTRICTS.map(d => `<option value="${d}" ${d === voiceState.district ? 'selected' : ''}>${d}</option>`).join('')}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('seller_ward_label')}</label>
+                    <input type="text" id="voice-seller-ward" value="${voiceState.ward}" placeholder="e.g. Vidyanagar / Malleshwaram" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                  </div>
+
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('seller_upi_label')}</label>
+                    <input type="text" id="voice-seller-upi" value="${voiceState.upiId || (voiceState.phone ? `${voiceState.phone}@upi` : '')}" placeholder="e.g. yourname@okhdfcbank or 9845012345@paytm" class="w-full text-xs font-bold text-dhwani-green font-mono bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                  </div>
+                </div>
+
+                <!-- Publish Action -->
+                <div class="pt-3 border-t border-dhwani-border">
+                  <button onclick="handlePublishStorefront()" class="w-full py-4 rounded-20 bg-gradient-to-r from-dhwani-green to-dhwani-greenDark text-white font-bold text-sm shadow-card hover:shadow-glow transform hover:-translate-y-0.5 active:translate-y-0 transition flex items-center justify-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-dhwani-turmeric"></i>
+                    <span>${t('publish_btn')}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PUBLISH SUCCESS MODAL -->
+        <div id="publish-success-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div class="bg-white rounded-30 max-w-md w-full p-6 sm:p-8 space-y-6 text-center border border-dhwani-border shadow-2xl animate-pop-in">
+            <div class="w-16 h-16 rounded-2xl bg-dhwani-greenLight text-dhwani-green mx-auto flex items-center justify-center shadow-xs">
+              <i data-lucide="party-popper" class="w-8 h-8"></i>
+            </div>
+            
+            <div class="space-y-1">
+              <h3 class="text-2xl font-bold text-dhwani-ink">🎉 ಅಂಗಡಿ ಸಿದ್ಧವಾಗಿದೆ! Shop is Live!</h3>
+              <p class="text-xs text-dhwani-muted">Your online shop has been published. Share this link with your customers.</p>
+            </div>
+
+            <div class="bg-dhwani-cream p-4 rounded-20 border border-dhwani-border flex flex-col items-center justify-center">
+              <div id="publish-qrcode-target" class="p-2 bg-white rounded-xl shadow-xs"></div>
+              <span class="text-[11px] font-bold text-dhwani-muted mt-2">Scan with GPay / PhonePe / Camera</span>
+            </div>
+
+            <div class="space-y-2">
+              <a id="publish-wa-btn" href="#" target="_blank" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-xs transition">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Share on WhatsApp</span>
+              </a>
+
+              <div class="flex items-center gap-2">
+                <button onclick="copyShopLink()" class="flex-1 py-2.5 px-3 bg-dhwani-cream hover:bg-dhwani-creamDark text-dhwani-ink rounded-xl font-bold text-xs border border-dhwani-border flex items-center justify-center gap-1.5 transition">
+                  <i data-lucide="copy" class="w-3.5 h-3.5 text-dhwani-green"></i>
+                  <span>Copy Link</span>
+                </button>
+                <a id="publish-view-shop-btn" href="#" class="flex-1 py-2.5 px-3 bg-dhwani-green hover:bg-dhwani-greenDark text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                  <span>Visit Shop →</span>
+                </a>
+              </div>
+            </div>
+
+            <button onclick="closePublishModalAndGoDashboard()" class="text-xs font-bold text-dhwani-muted hover:text-dhwani-ink">
+              Go to Seller Dashboard →
+            </button>
+          </div>
+        </div>
+
+        <!-- ADD CUSTOM ITEM MODAL -->
+        <div id="voice-add-item-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div class="bg-white rounded-30 max-w-md w-full p-6 space-y-4 border border-dhwani-border shadow-2xl animate-pop-in text-left">
+            <div class="flex items-center justify-between pb-2 border-b border-dhwani-border">
+              <h3 class="font-bold text-base text-dhwani-ink">Add Custom Product / Service</h3>
+              <button onclick="closeAddNewCustomItemModal()" class="text-dhwani-muted hover:text-dhwani-ink"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <form onsubmit="handleSaveCustomItemModal(event)" class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">Title</label>
+                <input type="text" id="modal-item-title" required placeholder="e.g. Homemade Ragi Cookies / Web Consultation" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-dhwani-ink mb-1">Price (₹ INR)</label>
+                  <input type="number" id="modal-item-price" required min="1" placeholder="250" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-dhwani-ink mb-1">Unit</label>
+                  <input type="text" id="modal-item-unit" required placeholder="packet / per project / kg" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">Category</label>
+                <select id="modal-item-category" class="w-full text-xs font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric">
+                  ${KARNATAKA_CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')}
+                </select>
+              </div>
+
+              <div class="pt-2 flex items-center justify-end gap-2">
+                <button type="button" onclick="closeAddNewCustomItemModal()" class="px-4 py-2 text-xs font-bold text-dhwani-muted hover:text-dhwani-ink">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 bg-dhwani-green hover:bg-dhwani-greenDark text-white text-xs font-bold rounded-xl shadow-xs transition">Add to List</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderVoiceItemsList() {
+      if (!voiceState.items || voiceState.items.length === 0) {
+        return `
+          <div class="p-8 bg-dhwani-cream/50 rounded-20 border border-dashed border-dhwani-border text-center space-y-2">
+            <i data-lucide="mic" class="w-8 h-8 text-dhwani-turmeric mx-auto"></i>
+            <p class="text-xs text-dhwani-muted font-medium">${t('no_items_yet')}</p>
+          </div>
+        `;
+      }
+
+      return voiceState.items.map((item, idx) => `
+        <div class="bg-dhwani-cream/70 p-3.5 rounded-20 border border-dhwani-border flex items-center justify-between gap-3 animate-pop-in">
+          <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 p-1 border border-dhwani-border/60 flex items-center justify-center overflow-hidden">
+            ${getCategoryArtwork(item.category, item.title)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <h5 class="font-bold text-xs text-dhwani-ink truncate">${item.title}</h5>
+            <div class="flex items-center gap-2 mt-0.5">
+              <span class="text-xs font-bold text-dhwani-green">₹${item.price}</span>
+              <span class="text-[11px] text-dhwani-muted">• ${item.unit}</span>
+              <span class="text-[10px] text-dhwani-terracotta font-semibold">(${item.category})</span>
+            </div>
+          </div>
+          <button onclick="handleRemoveVoiceItem(${idx})" class="p-1.5 text-dhwani-muted hover:text-dhwani-terracotta transition" title="Delete">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function initVoiceStudioEvents() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        voiceState.recognition = new SpeechRecognition();
+        voiceState.recognition.continuous = true;
+        voiceState.recognition.interimResults = true;
+        voiceState.recognition.lang = voiceState.activeVoiceLang;
+
+        voiceState.recognition.onresult = (event) => {
+          let text = '';
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            text += event.results[i][0].transcript;
+          }
+          const ta = document.getElementById('voice-transcript-area');
+          if (ta) ta.value = text;
+        };
+
+        voiceState.recognition.onerror = () => {
+          const lbl = document.getElementById('mic-status-label');
+          if (lbl) lbl.textContent = "Please type in the text box below";
+        };
+      }
+    }
+
+    function setVoiceEngineLang(code) {
+      voiceState.activeVoiceLang = code;
+      if (voiceState.recognition) voiceState.recognition.lang = code;
+      ['kn', 'en', 'hi'].forEach(l => {
+        const btn = document.getElementById(`vlang-${l}`);
+        if (btn) {
+          if (`${l}-IN` === code) btn.className = "px-3 py-1 rounded-lg bg-dhwani-green text-white transition";
+          else btn.className = "px-3 py-1 rounded-lg text-dhwani-ink hover:bg-white transition";
+        }
+      });
+      showToast('Voice Language Switched', code, 'info');
+    }
+
+    async function toggleVoiceRecording() {
+      const ring = document.getElementById('mic-pulse-ring');
+      const micBtn = document.getElementById('mic-trigger-btn');
+      const statusLbl = document.getElementById('mic-status-label');
+
+      if (!voiceState.isRecording) {
+        try {
+          AudioEngine.playChime('mic');
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+              voiceState.audioCtx = new AudioContext();
+              const source = voiceState.audioCtx.createMediaStreamSource(stream);
+              voiceState.analyser = voiceState.audioCtx.createAnalyser();
+              source.connect(voiceState.analyser);
+              voiceState.dataArray = new Uint8Array(voiceState.analyser.frequencyBinCount);
+              animateWavebars();
+            }
+          }
+          if (voiceState.recognition) voiceState.recognition.start();
+          voiceState.isRecording = true;
+          if (ring) ring.classList.remove('hidden');
+          if (micBtn) micBtn.className = "relative z-10 w-24 h-24 rounded-full bg-red-600 text-white shadow-glow flex flex-col items-center justify-center transform scale-105 transition-all";
+          if (statusLbl) statusLbl.textContent = t('speak_btn_listening');
+        } catch (e) {
+          voiceState.isRecording = true;
+          if (ring) ring.classList.remove('hidden');
+          if (statusLbl) statusLbl.textContent = "Listening... (or type below)";
+        }
+      } else {
+        AudioEngine.playChime('mic');
+        voiceState.isRecording = false;
+        if (voiceState.recognition) {
+          try { voiceState.recognition.stop(); } catch (e) {}
+        }
+        if (ring) ring.classList.add('hidden');
+        if (micBtn) micBtn.className = "relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-dhwani-turmeric to-dhwani-terracotta text-white shadow-glow flex flex-col items-center justify-center transform hover:scale-105 active:scale-95 transition-all";
+        if (statusLbl) statusLbl.textContent = t('speak_btn_idle');
+        handleParseVoiceTranscript();
+      }
+    }
+
+    function animateWavebars() {
+      if (!voiceState.isRecording || !voiceState.analyser) return;
+      voiceState.analyser.getByteFrequencyData(voiceState.dataArray);
+      const bars = document.querySelectorAll('#audio-waveform-bars .soundwave-bar');
+      bars.forEach((bar, idx) => {
+        const val = voiceState.dataArray[idx] || 10;
+        bar.style.height = `${Math.max(4, Math.min(32, val / 4))}px`;
+      });
+      voiceState.animFrame = requestAnimationFrame(animateWavebars);
+    }
+
+    function injectVoicePrompt(text) {
+      AudioEngine.playChime('mic');
+      const ta = document.getElementById('voice-transcript-area');
+      if (ta) ta.value = text;
+      handleParseVoiceTranscript();
+    }
+
+    function handleParseVoiceTranscript() {
+      const ta = document.getElementById('voice-transcript-area');
+      const text = ta ? ta.value : '';
+      if (!text.trim()) {
+        showToast('Empty Transcript', 'Please speak or enter some details first', 'error');
+        return;
+      }
+
+      const sName = document.getElementById('voice-seller-name')?.value || 'Seller';
+      const sDistrict = document.getElementById('voice-seller-district')?.value || 'Bengaluru Urban';
+
+      const parsed = parseAdaptiveVoiceListing(text, sName, sDistrict);
+      voiceState.items = parsed.items;
+      voiceState.category = parsed.category;
+      voiceState.shopName = parsed.shop_name;
+
+      const container = document.getElementById('voice-items-catalogue-container');
+      if (container) {
+        container.innerHTML = renderVoiceItemsList();
+        lucide.createIcons();
+      }
+
+      AudioEngine.playChime('success');
+      showToast('Items Extracted', `${parsed.items.length} items added to catalogue`, 'success');
+    }
+
+    function handleRemoveVoiceItem(index) {
+      voiceState.items.splice(index, 1);
+      const container = document.getElementById('voice-items-catalogue-container');
+      if (container) {
+        container.innerHTML = renderVoiceItemsList();
+        lucide.createIcons();
+      }
+    }
+
+    function openAddNewCustomItemModal() {
+      const modal = document.getElementById('voice-add-item-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeAddNewCustomItemModal() {
+      const modal = document.getElementById('voice-add-item-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleSaveCustomItemModal(e) {
+      e.preventDefault();
+      const title = document.getElementById('modal-item-title')?.value;
+      const price = parseFloat(document.getElementById('modal-item-price')?.value) || 200;
+      const unit = document.getElementById('modal-item-unit')?.value || 'unit';
+      const category = document.getElementById('modal-item-category')?.value || 'Sweets & Snacks';
+
+      voiceState.items.push({
+        id: 'item-' + Date.now(),
+        title,
+        price,
+        unit,
+        category,
+        description_local: `${title} - ಶುದ್ಧ ಮತ್ತು ವಿಶ್ವಾಸಾರ್ಹ`,
+        description_en: `High quality ${title}`,
+      });
+
+      closeAddNewCustomItemModal();
+      const container = document.getElementById('voice-items-catalogue-container');
+      if (container) {
+        container.innerHTML = renderVoiceItemsList();
+        lucide.createIcons();
+      }
+      AudioEngine.playChime('success');
+      showToast('Product Added', title, 'success');
+    }
+
+    async function handlePublishStorefront() {
+      const nameInput = document.getElementById('voice-seller-name');
+      const phoneInput = document.getElementById('voice-seller-phone');
+      const distInput = document.getElementById('voice-seller-district');
+      const wardInput = document.getElementById('voice-seller-ward');
+      const upiInput = document.getElementById('voice-seller-upi');
+
+      const name = (nameInput?.value || '').trim();
+      const phone = (phoneInput?.value || '').trim();
+      const district = distInput?.value || 'Bengaluru Urban';
+      const ward = (wardInput?.value || '').trim() || 'Central';
+      const upiId = (upiInput?.value || '').trim() || `${phone}@upi`;
+
+      if (!phone || phone.length < 10) {
+        showToast('Valid Phone Required', 'Please enter a 10-digit mobile number', 'error');
+        phoneInput?.focus();
+        return;
+      }
+
+      if (voiceState.items.length === 0) {
+        showToast('Catalogue Empty', 'Please speak or add at least 1 product/service', 'error');
+        return;
+      }
+
+      const sellerId = 'seller-' + Date.now();
+      const shopTitle = name ? `${name}'s ${voiceState.category.split('&')[0].trim()} Store` : `Dhwani ${voiceState.category.split('&')[0].trim()} Store`;
+      const slug = (name ? name : `shop-${phone.slice(-4)}`).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+      const newSeller = {
+        id: sellerId,
+        phone,
+        name: name || 'Karnataka Entrepreneur',
+        shop_name: shopTitle,
+        slug,
+        district,
+        ward,
+        language: voiceState.activeVoiceLang,
+        upi_id: upiId,
+        category: voiceState.category,
+        theme: { color: '#1F5E4B', tagline: `Dedicated to authentic offerings in ${district}` },
+        bio: `Providing high quality products and services crafted with local care across ${district}, Karnataka.`,
+        created_at: new Date().toISOString(),
+        rating: 5.0,
+        reviews_count: 1
+      };
+
+      await Store.createSeller(newSeller);
+      localStorage.setItem('dhwani_seller_phone', phone);
+      localStorage.setItem('dhwani_active_seller_id', sellerId);
+
+      for (const itm of voiceState.items) {
+        await Store.saveListing({
+          seller_id: sellerId,
+          title: itm.title,
+          price: itm.price,
+          unit: itm.unit,
+          category: itm.category || voiceState.category,
+          description_local: itm.description_local || '',
+          description_en: itm.description_en || '',
+          available: true,
+        });
+      }
+
+      AudioEngine.playChime('success');
+      if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+
+      const shopUrl = `${window.location.origin}${window.location.pathname}#/shop/${slug}`;
+      const qrTarget = document.getElementById('publish-qrcode-target');
+      if (qrTarget && typeof QRCode !== 'undefined') {
+        qrTarget.innerHTML = '';
+        new QRCode(qrTarget, { text: shopUrl, width: 140, height: 140, colorDark: "#1F5E4B", colorLight: "#ffffff" });
+      }
+
+      const waText = encodeURIComponent(`ನಮಸ್ಕಾರ! ನನ್ನ ಹೊಸ ಆನ್‌ಲೈನ್ ಅಂಗಡಿ Dhwani (ಧ್ವನಿ) ನಲ್ಲಿ ಲೈವ್ ಆಗಿದೆ: *${shopTitle}* (${district}).\n\nನೇರವಾಗಿ ಆರ್ಡರ್ ಮಾಡಲು ಈ ಲಿಂಕ್ ಒತ್ತಿರಿ:\n${shopUrl}`);
+      const waBtn = document.getElementById('publish-wa-btn');
+      if (waBtn) waBtn.href = `https://wa.me/?text=${waText}`;
+
+      const viewBtn = document.getElementById('publish-view-shop-btn');
+      if (viewBtn) viewBtn.href = `#/shop/${slug}`;
+
+      const modal = document.getElementById('publish-success-modal');
+      if (modal) modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function copyShopLink() {
+      const slug = voiceState.shopName?.toLowerCase()?.replace(/[^a-z0-9]+/g, '-') || 'my-shop';
+      const shopUrl = `${window.location.origin}${window.location.pathname}#/shop/${slug}`;
+      navigator.clipboard.writeText(shopUrl).then(() => {
+        showToast('Link Copied!', shopUrl, 'success');
+      });
+    }
+
+    function closePublishModalAndGoDashboard() {
+      const modal = document.getElementById('publish-success-modal');
+      if (modal) modal.classList.add('hidden');
+      Router.navigate('#/dashboard');
+    }
+
+    // ====================================================================
+    // SCREEN 3: SELLER DASHBOARD (#/dashboard)
+    // ====================================================================
+    let dashboardState = { activeSeller: null, orders: [], listings: [] };
+
+    async function renderDashboardScreen() {
+      const allSellers = await Store.getSellers();
+      let activeSellerId = localStorage.getItem('dhwani_active_seller_id');
+      let currentSeller = allSellers.find(s => s.id === activeSellerId) || allSellers[0] || SEED_SELLERS[0];
+      
+      dashboardState.activeSeller = currentSeller;
+      dashboardState.orders = await Store.getOrders(currentSeller.id);
+      dashboardState.listings = await Store.getListings(currentSeller.id);
+
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+
+      const todayOrders = dashboardState.orders.filter(o => {
+        const od = new Date(o.created_at);
+        return od >= todayStart && o.status !== 'cancelled';
+      });
+
+      const todayEarnings = todayOrders
+        .filter(o => ['paid', 'ready', 'delivered'].includes(o.status))
+        .reduce((sum, o) => sum + (parseFloat(o.amount) || 0), 0);
+
+      return `
+        <div class="space-y-8">
+          <!-- Header -->
+          <div class="bg-white p-6 rounded-30 border border-dhwani-border shadow-soft flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="space-y-1 text-left">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-bold text-dhwani-green uppercase tracking-wider">${t('dashboard_title')}</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-bold text-dhwani-ink font-serif-heading">${currentSeller.shop_name}</h1>
+              <p class="text-xs text-dhwani-muted">Owner: <span class="font-bold text-dhwani-ink">${currentSeller.name}</span> • 📍 ${currentSeller.district} • UPI: <span class="font-mono text-dhwani-green font-bold">${currentSeller.upi_id}</span></p>
+            </div>
+
+            <!-- Switcher & Actions -->
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="flex items-center gap-1.5 bg-dhwani-cream px-3 py-1.5 rounded-xl border border-dhwani-border">
+                <span class="text-xs font-bold text-dhwani-muted">Seller:</span>
+                <select onchange="handleDashboardSellerSwitch(this.value)" class="text-xs font-bold text-dhwani-ink bg-transparent focus:outline-none">
+                  ${allSellers.map(s => `
+                    <option value="${s.id}" ${s.id === currentSeller.id ? 'selected' : ''}>${s.shop_name} (${s.district})</option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <a href="#/shop/${currentSeller.slug}" class="px-3.5 py-2 rounded-xl bg-dhwani-cream hover:bg-dhwani-creamDark text-dhwani-green font-bold text-xs border border-dhwani-border flex items-center gap-1.5 transition">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span>${t('visit_shop_btn')}</span>
+              </a>
+
+              <a href="#/passport/${currentSeller.slug}" class="px-3.5 py-2 rounded-xl bg-dhwani-terracotta hover:bg-dhwani-terracottaDark text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                <span>${t('passport_btn')}</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Metrics -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-20 border border-dhwani-border shadow-xs">
+              <span class="text-xs text-dhwani-muted font-bold">${t('today_earnings')}</span>
+              <div class="text-2xl sm:text-3xl font-bold text-dhwani-green mt-1">₹${todayEarnings.toLocaleString('en-IN')}</div>
+              <span class="text-[11px] text-emerald-700 font-semibold">Direct UPI</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-20 border border-dhwani-border shadow-xs">
+              <span class="text-xs text-dhwani-muted font-bold">${t('today_orders')}</span>
+              <div class="text-2xl sm:text-3xl font-bold text-dhwani-ink mt-1">${todayOrders.length}</div>
+              <span class="text-[11px] text-dhwani-muted">Active Stream</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-20 border border-dhwani-border shadow-xs">
+              <span class="text-xs text-dhwani-muted font-bold">${t('active_products')}</span>
+              <div class="text-2xl sm:text-3xl font-bold text-dhwani-turmericDark mt-1">${dashboardState.listings.filter(l => l.available).length}</div>
+              <span class="text-[11px] text-dhwani-muted">in catalogue</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-20 border border-dhwani-border shadow-xs">
+              <span class="text-xs text-dhwani-muted font-bold">${t('consistency_score')}</span>
+              <div class="text-2xl sm:text-3xl font-bold text-dhwani-terracotta mt-1">94/100</div>
+              <a href="#/passport/${currentSeller.slug}" class="text-[11px] text-dhwani-green font-bold hover:underline">View Passport →</a>
+            </div>
+          </div>
+
+          <!-- Orders and Products Columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
+            
+            <!-- LEFT: ORDERS STREAM (7 Cols) -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-dhwani-turmeric animate-ping"></span>
+                  <h3 class="text-lg font-bold text-dhwani-ink">${t('orders_live_heading')}</h3>
+                </div>
+                <span class="text-xs text-dhwani-muted font-bold">${dashboardState.orders.length} Total</span>
+              </div>
+
+              <div id="dashboard-orders-container" class="space-y-3">
+                ${dashboardState.orders.map(ord => renderDashboardOrderCard(ord)).join('')}
+              </div>
+            </div>
+
+            <!-- RIGHT: CATALOGUE MANAGEMENT (5 Cols) -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-dhwani-ink">${t('catalogue_heading')}</h3>
+                <button onclick="openAddNewCustomItemModal()" class="px-3 py-1.5 bg-dhwani-green text-white rounded-xl text-xs font-bold shadow-xs">
+                  ${t('add_product_btn')}
+                </button>
+              </div>
+
+              <div class="space-y-2.5">
+                ${dashboardState.listings.map(item => `
+                  <div class="bg-white p-3.5 rounded-20 border border-dhwani-border shadow-xs flex items-center justify-between gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-dhwani-cream flex-shrink-0 p-1 border border-dhwani-border/50 flex items-center justify-center overflow-hidden">
+                      ${getCategoryArtwork(item.category, item.title)}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h5 class="font-bold text-xs text-dhwani-ink truncate">${item.title}</h5>
+                      <span class="text-xs font-bold text-dhwani-green">₹${item.price} <span class="text-[10px] text-dhwani-muted font-normal">• ${item.unit}</span></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <button onclick="toggleProductAvailability('${item.id}', ${!item.available})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold border ${item.available ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-gray-100 text-gray-500 border-gray-200'}">
+                        ${item.available ? t('in_stock_btn') : t('out_of_stock_btn')}
+                      </button>
+                      <button onclick="handleDeleteProduct('${item.id}')" class="p-1 text-dhwani-muted hover:text-dhwani-terracotta"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDashboardOrderCard(ord) {
+      const itemsList = Array.isArray(ord.items) && ord.items.length > 0 ? ord.items.map(i => `${i.qty}x ${i.title}`).join(', ') : 'Special item order';
+      
+      const statusBadgeClasses = {
+        new: 'bg-amber-100 text-amber-900 border-amber-300',
+        paid: 'bg-sky-100 text-sky-900 border-sky-300',
+        ready: 'bg-indigo-100 text-indigo-900 border-indigo-300',
+        delivered: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+      };
+
+      const waCustomerMsg = encodeURIComponent(`ನಮಸ್ಕಾರ ${ord.buyer_name}! ನಿಮ್ಮ Dhwani ಆರ್ಡರ್ #${ord.id} (${itemsList}) ಸ್ವೀಕರಿಸಲಾಗಿದೆ / ನವೀಕರಿಸಲಾಗಿದೆ. ಧನ್ಯವಾದಗಳು!`);
+
+      return `
+        <div class="bg-white p-4 rounded-20 border border-dhwani-border shadow-xs space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-dhwani-ink">${ord.buyer_name}</span>
+                <span class="text-xs text-dhwani-muted font-mono">(${ord.buyer_phone})</span>
+              </div>
+              <p class="text-xs text-dhwani-ink font-medium mt-1">${itemsList}</p>
+              <div class="flex items-center gap-2 text-[11px] text-dhwani-muted mt-1">
+                <span>🕒 ${new Date(ord.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span>
+                <span>•</span>
+                <span class="font-bold text-dhwani-ink uppercase">🚀 ${ord.fulfilment}</span>
+                ${ord.delivery_address ? `<span class="truncate max-w-[180px]" title="${ord.delivery_address}">📍 ${ord.delivery_address}</span>` : ''}
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-base font-bold text-dhwani-green">₹${ord.amount}</div>
+              <span class="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border uppercase ${statusBadgeClasses[ord.status] || 'bg-sky-100 text-sky-900'}">
+                ${ord.status}
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-dhwani-border/60 flex flex-wrap items-center justify-between gap-2">
+            <a href="https://wa.me/91${ord.buyer_phone}?text=${waCustomerMsg}" target="_blank" class="text-[11px] text-emerald-700 hover:underline font-bold flex items-center gap-1">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Customer
+            </a>
+            
+            <div class="flex items-center gap-1.5">
+              ${ord.status === 'new' ? `<button onclick="handleUpdateOrderStatus('${ord.id}', 'paid')" class="px-2.5 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition">${t('mark_paid_btn')}</button>` : ''}
+              ${ord.status === 'paid' ? `<button onclick="handleUpdateOrderStatus('${ord.id}', 'ready')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition">${t('mark_ready_btn')}</button>` : ''}
+              ${ord.status === 'ready' ? `<button onclick="handleUpdateOrderStatus('${ord.id}', 'delivered')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition">${t('mark_delivered_btn')}</button>` : ''}
+              ${ord.status === 'delivered' ? `<span class="text-xs font-bold text-emerald-700">${t('completed_status')}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function initDashboardEvents() {
+      window.addEventListener('dhwani_order_received', () => Router.handleRoute());
+      window.addEventListener('dhwani_order_status_updated', () => Router.handleRoute());
+    }
+
+    function handleDashboardSellerSwitch(id) {
+      localStorage.setItem('dhwani_active_seller_id', id);
+      Router.handleRoute();
+    }
+
+    async function handleUpdateOrderStatus(id, status) {
+      AudioEngine.playChime('success');
+      await Store.updateOrderStatus(id, status);
+      showToast('Status Updated', status.toUpperCase(), 'success');
+      Router.handleRoute();
+    }
+
+    async function toggleProductAvailability(id, avail) {
+      const itm = dashboardState.listings.find(l => l.id === id);
+      if (itm) {
+        itm.available = avail;
+        await Store.saveListing(itm);
+        showToast('Stock Updated', avail ? 'In Stock' : 'Out of Stock', 'info');
+        Router.handleRoute();
+      }
+    }
+
+    async function handleDeleteProduct(id) {
+      if (confirm("Remove this product?")) {
+        await Store.deleteListing(id);
+        showToast('Removed', 'Item deleted', 'info');
+        Router.handleRoute();
+      }
+    }
+
+    // ====================================================================
+    // SCREEN 4: PUBLIC SHOP STOREFRONT (#/shop/<slug>)
+    // ====================================================================
+    let shopState = { seller: null, listings: [], cart: {}, fulfilment: 'pickup', activeConfirmedOrder: null };
+
+    async function renderShopScreen(slug) {
+      const seller = await Store.getSellerBySlug(slug);
+      if (!seller) return `<div class="text-center py-20"><h2 class="text-2xl font-bold">Shop Not Found</h2></div>`;
+
+      shopState.seller = seller;
+      shopState.listings = await Store.getListings(seller.id);
+      shopState.cart = {};
+
+      return `
+        <div class="max-w-4xl mx-auto space-y-6 pb-24 text-left">
+          <div class="rounded-30 text-white p-6 sm:p-8 shadow-card" style="background: linear-gradient(135deg, ${seller.theme?.color || '#1F5E4B'}, #154134)">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/20 backdrop-blur-md">📍 ${seller.district}</span>
+                <span class="text-xs font-bold bg-emerald-900/40 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-400/30">Direct UPI Verified ✓</span>
+              </div>
+              <h1 class="text-2xl sm:text-4xl font-bold font-serif-heading">${seller.shop_name}</h1>
+              <p class="text-xs sm:text-sm text-white/90 max-w-xl">${seller.bio || seller.theme?.tagline}</p>
+              <div class="pt-2 flex items-center gap-4 text-xs font-semibold text-white/90 border-t border-white/20">
+                <span>By: <strong>${seller.name}</strong></span>
+                <span>•</span>
+                <a href="#/passport/${seller.slug}" class="underline text-dhwani-turmeric hover:text-white flex items-center gap-1">
+                  <i data-lucide="award" class="w-3.5 h-3.5"></i> ${t('passport_btn')}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="font-bold text-lg text-dhwani-ink">${t('shop_products_heading')}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              ${shopState.listings.map(item => `
+                <div class="bg-white rounded-20 border border-dhwani-border p-4 shadow-xs flex items-start gap-3.5">
+                  <div class="w-16 h-16 rounded-2xl bg-dhwani-cream flex-shrink-0 p-1 border border-dhwani-border/60 flex items-center justify-center overflow-hidden">
+                    ${getCategoryArtwork(item.category, item.title)}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-bold text-sm text-dhwani-ink">${item.title}</h4>
+                    <div class="pt-2 flex items-center justify-between">
+                      <span class="text-base font-bold text-dhwani-green">₹${item.price} <span class="text-[11px] text-dhwani-muted font-normal">/${item.unit}</span></span>
+                      ${item.available ? `
+                        <div class="flex items-center gap-2 bg-dhwani-cream rounded-xl p-1 border border-dhwani-border">
+                          <button onclick="updateCartItem('${item.id}', -1)" class="w-6 h-6 rounded-lg bg-white text-dhwani-ink font-bold flex items-center justify-center shadow-xs">-</button>
+                          <span id="cart-qty-${item.id}" class="text-xs font-bold px-1">0</span>
+                          <button onclick="updateCartItem('${item.id}', 1)" class="w-6 h-6 rounded-lg bg-dhwani-green text-white font-bold flex items-center justify-center shadow-xs">+</button>
+                        </div>
+                      ` : `<span class="text-xs text-dhwani-muted font-semibold">Out of Stock</span>`}
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Cart Bar -->
+        <div id="floating-cart-bar" class="hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-dhwani-border p-4 shadow-2xl animate-pop-in">
+          <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            <div>
+              <span class="text-xs text-dhwani-muted" id="cart-summary-items">0 items in cart</span>
+              <div class="text-xl font-bold text-dhwani-green" id="cart-summary-total">₹0</div>
+            </div>
+            <button onclick="openCheckoutModal()" class="py-3 px-6 rounded-20 bg-gradient-to-r from-dhwani-green to-dhwani-greenDark text-white font-bold text-sm shadow-card hover:shadow-glow flex items-center gap-2 transition">
+              <i data-lucide="shopping-bag" class="w-4 h-4 text-dhwani-turmeric"></i>
+              <span>${t('checkout_btn')}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div id="checkout-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div class="bg-white rounded-30 max-w-lg w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-dhwani-border shadow-2xl animate-pop-in text-left">
+            <div class="flex items-center justify-between pb-3 border-b border-dhwani-border">
+              <h3 class="font-bold text-lg text-dhwani-ink">${t('cart_title')}</h3>
+              <button onclick="closeCheckoutModal()" class="text-dhwani-muted hover:text-dhwani-ink"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <div id="checkout-items-list" class="space-y-2 bg-dhwani-cream/60 p-3.5 rounded-20 border text-xs"></div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('buyer_name_label')}</label>
+                <input type="text" id="buyer-name-input" required placeholder="e.g. Praveen" class="w-full text-xs font-bold bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('buyer_phone_label')}</label>
+                <input type="tel" id="buyer-phone-input" maxlength="10" placeholder="9845110001" class="w-full text-xs font-bold bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('fulfilment_label')}</label>
+                <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+                  <button type="button" onclick="setFulfilment('pickup')" id="fulfil-pickup-btn" class="p-2.5 rounded-xl border border-dhwani-green bg-dhwani-green text-white text-center">${t('pickup_opt')}</button>
+                  <button type="button" onclick="setFulfilment('rider')" id="fulfil-rider-btn" class="p-2.5 rounded-xl border border-dhwani-border bg-dhwani-cream text-dhwani-ink text-center">${t('rider_opt')}</button>
+                </div>
+              </div>
+              <div id="buyer-address-wrapper" class="hidden">
+                <label class="block text-xs font-bold text-dhwani-ink mb-1">${t('delivery_address_label')}</label>
+                <input type="text" id="buyer-address-input" placeholder="Delivery address in Karnataka" class="w-full text-xs bg-dhwani-cream border border-dhwani-border rounded-xl p-2.5" />
+              </div>
+            </div>
+
+            <!-- UPI Payment Box -->
+            <div class="bg-gradient-to-br from-dhwani-cream to-white p-4 rounded-20 border border-dhwani-turmeric/50 text-center space-y-2">
+              <span class="text-xs font-bold text-dhwani-green">Payee: ${seller.name} (${seller.upi_id})</span>
+              <div class="flex justify-center"><div id="upi-qrcode-target" class="p-2 bg-white rounded-xl shadow-xs"></div></div>
+              <a id="upi-deeplink-btn" href="#" class="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-dhwani-turmeric text-white rounded-xl font-bold text-xs shadow-xs">
+                ${t('pay_upi_btn')}
+              </a>
+            </div>
+
+            <button onclick="handleConfirmPayment()" class="w-full py-3.5 bg-dhwani-green hover:bg-dhwani-greenDark text-white rounded-20 font-bold text-sm shadow-card flex items-center justify-center gap-2">
+              <i data-lucide="check-circle" class="w-5 h-5 text-dhwani-turmeric"></i>
+              <span>${t('i_have_paid_btn')}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- END-TO-END LIVE ORDER CONFIRMATION & REAL-TIME TRACKING RECEIPT MODAL -->
+        <div id="order-tracker-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div class="bg-white rounded-30 max-w-md w-full p-6 sm:p-8 space-y-6 max-h-[92vh] overflow-y-auto border border-dhwani-border shadow-2xl animate-pop-in text-left">
+            <div class="text-center space-y-1">
+              <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 mx-auto flex items-center justify-center shadow-xs">
+                <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-bold text-dhwani-ink">${t('order_success_title')}</h3>
+              <p class="text-xs text-dhwani-muted">${t('order_success_sub')}</p>
+            </div>
+
+            <!-- Receipt Card -->
+            <div id="order-receipt-content" class="bg-dhwani-cream p-4 rounded-20 border border-dhwani-border text-xs space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-dhwani-border/60">
+                <span class="text-dhwani-muted">${t('order_id_lbl')}</span>
+                <span id="tracker-order-id" class="font-mono font-bold text-dhwani-ink text-sm">#DHW-0000</span>
+              </div>
+              
+              <!-- Realtime Stepper -->
+              <div class="space-y-1.5 py-1">
+                <span class="font-bold text-dhwani-ink block">${t('order_status_lbl')}</span>
+                <div class="flex items-center justify-between text-[10px] font-bold text-dhwani-muted pt-1">
+                  <span id="step-paid" class="text-emerald-700 font-bold">1. Paid ✓</span>
+                  <span id="step-ready" class="text-dhwani-muted">2. Ready 📦</span>
+                  <span id="step-delivered" class="text-dhwani-muted">3. Delivered 🚚</span>
+                </div>
+                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden mt-1">
+                  <div id="tracker-progress-bar" class="bg-emerald-600 h-full w-1/3 transition-all duration-500"></div>
+                </div>
+              </div>
+
+              <!-- Order Breakdown -->
+              <div class="pt-2 border-t border-dhwani-border/60 space-y-1">
+                <div id="tracker-items-list" class="text-dhwani-ink font-medium"></div>
+                <div class="flex justify-between items-center pt-2 font-bold text-sm">
+                  <span>${t('total_paid_lbl')}</span>
+                  <span id="tracker-total-amount" class="text-dhwani-green">₹0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- End-to-End Buyer Action Buttons -->
+            <div class="space-y-2">
+              <a id="tracker-whatsapp-seller-btn" href="#" target="_blank" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>${t('contact_seller_wa')}</span>
+              </a>
+
+              <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="flex-1 py-2.5 px-3 bg-dhwani-cream hover:bg-dhwani-creamDark text-dhwani-ink rounded-xl font-bold text-xs border border-dhwani-border flex items-center justify-center gap-1.5 transition">
+                  <i data-lucide="printer" class="w-3.5 h-3.5 text-dhwani-green"></i>
+                  <span>Print Receipt</span>
+                </button>
+                <a href="#/dashboard" class="flex-1 py-2.5 px-3 bg-dhwani-green hover:bg-dhwani-greenDark text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                  <span>Dashboard →</span>
+                </a>
+              </div>
+            </div>
+
+            <button onclick="closeOrderTrackerModal()" class="w-full py-2 text-xs font-bold text-dhwani-muted hover:text-dhwani-ink text-center">
+              Close Tracker & Continue Shopping
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function initShopEvents() {
+      updateCartDisplay();
+
+      // Listen to status updates in real-time to update the buyer's order tracker live
+      window.addEventListener('dhwani_order_status_updated', (ev) => {
+        const detail = ev.detail;
+        if (shopState.activeConfirmedOrder && detail && (detail.orderId === shopState.activeConfirmedOrder.id || detail.id === shopState.activeConfirmedOrder.id)) {
+          const newStatus = detail.status || detail;
+          shopState.activeConfirmedOrder.status = newStatus;
+          updateTrackerStatusUI(newStatus);
+          AudioEngine.playChime('order');
+          showToast('Order Status Updated!', `Your order is now: ${newStatus.toUpperCase()}`, 'success');
+        }
+      });
+    }
+
+    function updateCartItem(id, delta) {
+      const q = Math.max(0, (shopState.cart[id] || 0) + delta);
+      if (q === 0) delete shopState.cart[id];
+      else shopState.cart[id] = q;
+
+      const qtyEl = document.getElementById(`cart-qty-${id}`);
+      if (qtyEl) qtyEl.textContent = q;
+      AudioEngine.playChime('mic');
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const count = Object.values(shopState.cart).reduce((a, b) => a + b, 0);
+      let total = 0;
+      Object.entries(shopState.cart).forEach(([id, qty]) => {
+        const itm = shopState.listings.find(l => l.id === id);
+        if (itm) total += itm.price * qty;
+      });
+
+      const bar = document.getElementById('floating-cart-bar');
+      const itemsLbl = document.getElementById('cart-summary-items');
+      const totalLbl = document.getElementById('cart-summary-total');
+
+      if (count > 0) {
+        if (bar) bar.classList.remove('hidden');
+        if (itemsLbl) itemsLbl.textContent = `${count} item(s)`;
+        if (totalLbl) totalLbl.textContent = `₹${total}`;
+      } else {
+        if (bar) bar.classList.add('hidden');
+      }
+    }
+
+    function openCheckoutModal() {
+      let total = 0;
+      const list = document.getElementById('checkout-items-list');
+      if (list) {
+        list.innerHTML = Object.entries(shopState.cart).map(([id, qty]) => {
+          const item = shopState.listings.find(l => l.id === id);
+          if (!item) return '';
+          const lineTotal = item.price * qty;
+          total += lineTotal;
+          return `<div class="flex justify-between"><span>${qty}x ${item.title}</span><span class="font-bold text-dhwani-green">₹${lineTotal}</span></div>`;
+        }).join('') + `<div class="pt-2 border-t font-bold flex justify-between"><span>Total:</span><span class="text-dhwani-green">₹${total}</span></div>`;
+      }
+
+      const upiUrl = `upi://pay?pa=${encodeURIComponent(shopState.seller.upi_id)}&pn=${encodeURIComponent(shopState.seller.shop_name)}&am=${total}&cu=INR`;
+      const qrTarget = document.getElementById('upi-qrcode-target');
+      if (qrTarget && typeof QRCode !== 'undefined') {
+        qrTarget.innerHTML = '';
+        new QRCode(qrTarget, { text: upiUrl, width: 120, height: 120, colorDark: "#1F5E4B", colorLight: "#ffffff" });
+      }
+      const deepLink = document.getElementById('upi-deeplink-btn');
+      if (deepLink) deepLink.href = upiUrl;
+
+      const modal = document.getElementById('checkout-modal');
+      if (modal) modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function setFulfilment(type) {
+      shopState.fulfilment = type;
+      const pick = document.getElementById('fulfil-pickup-btn');
+      const rider = document.getElementById('fulfil-rider-btn');
+      const addr = document.getElementById('buyer-address-wrapper');
+      if (type === 'pickup') {
+        if (pick) pick.className = "p-2.5 rounded-xl border border-dhwani-green bg-dhwani-green text-white text-center";
+        if (rider) rider.className = "p-2.5 rounded-xl border border-dhwani-border bg-dhwani-cream text-dhwani-ink text-center";
+        if (addr) addr.classList.add('hidden');
+      } else {
+        if (pick) pick.className = "p-2.5 rounded-xl border border-dhwani-border bg-dhwani-cream text-dhwani-ink text-center";
+        if (rider) rider.className = "p-2.5 rounded-xl border border-dhwani-green bg-dhwani-green text-white text-center";
+        if (addr) addr.classList.remove('hidden');
+      }
+    }
+
+    async function handleConfirmPayment() {
+      const name = document.getElementById('buyer-name-input')?.value.trim();
+      const phone = document.getElementById('buyer-phone-input')?.value.trim();
+      if (!name || !phone || phone.length < 10) {
+        showToast('Incomplete Form', 'Please enter your name and valid mobile number', 'error');
+        return;
+      }
+
+      let total = 0;
+      const itemsArr = [];
+      Object.entries(shopState.cart).forEach(([id, qty]) => {
+        const item = shopState.listings.find(l => l.id === id);
+        if (item) {
+          total += item.price * qty;
+          itemsArr.push({ listing_id: id, title: item.title, price: item.price, qty, unit: item.unit });
+        }
+      });
+
+      const order = await Store.createOrder({
+        seller_id: shopState.seller.id,
+        items: itemsArr,
+        buyer_name: name,
+        buyer_phone: phone,
+        qty: itemsArr.length,
+        amount: total,
+        status: 'paid',
+        fulfilment: shopState.fulfilment,
+        delivery_address: document.getElementById('buyer-address-input')?.value || null,
+        created_at: new Date().toISOString()
+      });
+
+      shopState.activeConfirmedOrder = order;
+      shopState.cart = {};
+      updateCartDisplay();
+      closeCheckoutModal();
+
+      AudioEngine.playChime('order');
+      if (typeof confetti === 'function') confetti({ particleCount: 90, spread: 60 });
+
+      // Open Live Tracking & Receipt Screen
+      const idEl = document.getElementById('tracker-order-id');
+      const amtEl = document.getElementById('tracker-total-amount');
+      const listEl = document.getElementById('tracker-items-list');
+      const waBtn = document.getElementById('tracker-whatsapp-seller-btn');
+
+      if (idEl) idEl.textContent = `#${order.id}`;
+      if (amtEl) amtEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+      if (listEl) {
+        listEl.innerHTML = itemsArr.map(i => `<div class="flex justify-between py-0.5"><span>${i.qty}x ${i.title}</span><span>₹${i.price * i.qty}</span></div>`).join('');
+      }
+
+      const waText = encodeURIComponent(`ನಮಸ್ಕಾರ ${shopState.seller.name}! ನಾನು Dhwani ನಲ್ಲಿ ಆರ್ಡರ್ ಮಾಡಿದ್ದೇನೆ: Order #${order.id} for ₹${total} (${itemsArr.map(i => `${i.qty}x ${i.title}`).join(', ')}).`);
+      if (waBtn) waBtn.href = `https://wa.me/91${shopState.seller.phone}?text=${waText}`;
+
+      updateTrackerStatusUI('paid');
+
+      const trackerModal = document.getElementById('order-tracker-modal');
+      if (trackerModal) trackerModal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function updateTrackerStatusUI(status) {
+      const stepPaid = document.getElementById('step-paid');
+      const stepReady = document.getElementById('step-ready');
+      const stepDelivered = document.getElementById('step-delivered');
+      const bar = document.getElementById('tracker-progress-bar');
+
+      if (status === 'paid' || status === 'new') {
+        if (bar) bar.style.width = '33%';
+        if (stepPaid) stepPaid.className = 'text-emerald-700 font-bold';
+        if (stepReady) stepReady.className = 'text-dhwani-muted';
+        if (stepDelivered) stepDelivered.className = 'text-dhwani-muted';
+      } else if (status === 'ready') {
+        if (bar) bar.style.width = '66%';
+        if (stepPaid) stepPaid.className = 'text-emerald-700 font-bold';
+        if (stepReady) stepReady.className = 'text-indigo-700 font-bold';
+        if (stepDelivered) stepDelivered.className = 'text-dhwani-muted';
+      } else if (status === 'delivered') {
+        if (bar) bar.style.width = '100%';
+        if (stepPaid) stepPaid.className = 'text-emerald-700 font-bold';
+        if (stepReady) stepReady.className = 'text-indigo-700 font-bold';
+        if (stepDelivered) stepDelivered.className = 'text-emerald-700 font-bold';
+      }
+    }
+
+    function closeOrderTrackerModal() {
+      const modal = document.getElementById('order-tracker-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // ====================================================================
+    // SCREEN 5: KARNATAKA DISCOVERY (#/discover)
+    // ====================================================================
+    let discoverFilter = { district: 'all', category: 'all', query: '' };
+
+    async function renderDiscoverScreen() {
+      const sellers = await Store.getSellers();
+      return `
+        <div class="space-y-6 text-left">
+          <div class="bg-white p-6 sm:p-8 rounded-30 border border-dhwani-border shadow-soft space-y-4">
+            <div>
+              <span class="text-xs font-bold text-dhwani-green uppercase tracking-wider">Karnataka Statewide Micro-Commerce</span>
+              <h1 class="text-2xl sm:text-4xl font-bold text-dhwani-ink font-serif-heading">${t('discover_title')}</h1>
+              <p class="text-xs sm:text-sm text-dhwani-muted mt-1">${t('discover_sub')}</p>
+            </div>
+
+            <!-- Search -->
+            <div class="relative">
+              <i data-lucide="search" class="w-5 h-5 text-dhwani-muted absolute left-3.5 top-3.5"></i>
+              <input type="text" value="${discoverFilter.query}" oninput="handleDiscoverSearch(this.value)" placeholder="${t('search_placeholder')}" class="w-full text-xs sm:text-sm font-bold text-dhwani-ink bg-dhwani-cream border border-dhwani-border rounded-20 pl-11 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-dhwani-turmeric" />
+            </div>
+
+            <!-- District Filter Chips -->
+            <div class="space-y-1.5">
+              <span class="text-xs font-bold text-dhwani-muted">${t('district_filter_label')}</span>
+              <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                <button onclick="setDiscoverDistrict('all')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border ${discoverFilter.district === 'all' ? 'bg-dhwani-green text-white border-dhwani-green' : 'bg-dhwani-cream text-dhwani-ink border-dhwani-border'}">${t('all_districts')}</button>
+                ${KARNATAKA_DISTRICTS.map(d => `
+                  <button onclick="setDiscoverDistrict('${d}')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border ${discoverFilter.district === d ? 'bg-dhwani-green text-white border-dhwani-green' : 'bg-dhwani-cream text-dhwani-ink border-dhwani-border'}">${d}</button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Category Filter Chips -->
+            <div class="space-y-1.5">
+              <span class="text-xs font-bold text-dhwani-muted">${t('category_filter_label')}</span>
+              <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                <button onclick="setDiscoverCategory('all')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border ${discoverFilter.category === 'all' ? 'bg-dhwani-turmeric text-white border-dhwani-turmericDark' : 'bg-dhwani-cream text-dhwani-ink border-dhwani-border'}">${t('all_categories')}</button>
+                ${KARNATAKA_CATEGORIES.map(c => `
+                  <button onclick="setDiscoverCategory('${c}')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border ${discoverFilter.category === c ? 'bg-dhwani-turmeric text-white border-dhwani-turmericDark' : 'bg-dhwani-cream text-dhwani-ink border-dhwani-border'}">${c}</button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div id="discover-shops-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            ${renderDiscoverShopsGrid(sellers)}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDiscoverShopsGrid(sellers) {
+      if (!Array.isArray(sellers)) return '';
+      const filtered = sellers.filter(s => {
+        if (!s) return false;
+        const sDist = (s.district || '').toLowerCase();
+        const fDist = (discoverFilter.district || 'all').toLowerCase();
+        const matchesDist = fDist === 'all' || sDist === fDist;
+
+        const sCat = (s.category || '').toLowerCase();
+        const fCat = (discoverFilter.category || 'all').toLowerCase();
+        const matchesCat = fCat === 'all' || sCat === fCat;
+
+        const q = (discoverFilter.query || '').toLowerCase().trim();
+        const sShop = (s.shop_name || '').toLowerCase();
+        const sName = (s.name || '').toLowerCase();
+        const sBio = (s.bio || '').toLowerCase();
+
+        const matchesQuery = !q || sShop.includes(q) || sName.includes(q) || sDist.includes(q) || sBio.includes(q);
+        return matchesDist && matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        return `
+          <div class="col-span-full bg-white p-12 rounded-30 border border-dhwani-border text-center space-y-3">
+            <i data-lucide="search-x" class="w-10 h-10 text-dhwani-muted mx-auto"></i>
+            <h3 class="font-bold text-lg text-dhwani-ink">${t('no_shops_found')}</h3>
+            <button onclick="resetDiscoverFilters()" class="px-4 py-2 bg-dhwani-green text-white rounded-xl text-xs font-bold">${t('clear_filters_btn')}</button>
+          </div>
+        `;
+      }
+
+      return filtered.map(s => `
+        <div class="bg-white rounded-30 border border-dhwani-border p-5 shadow-xs hover:shadow-card transition flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-dhwani-cream text-dhwani-green border border-dhwani-border/60">
+                📍 ${s.district || 'Karnataka'}
+              </span>
+              <span class="text-xs font-bold text-amber-600 flex items-center gap-1">★ ${s.rating || 4.9}</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-base text-dhwani-ink font-serif-heading">${s.shop_name || 'Karnataka Home Store'}</h3>
+              <p class="text-xs text-dhwani-muted line-clamp-2 mt-1">${s.bio || (s.theme && s.theme.tagline) || 'Authentic home kitchen and craft studio.'}</p>
+            </div>
+            <div class="text-[11px] text-dhwani-muted font-semibold">Founder: <strong class="text-dhwani-ink">${s.name || 'Artisan Seller'}</strong></div>
+          </div>
+          <div class="pt-3 border-t border-dhwani-border/60 flex items-center justify-between">
+            <a href="#/shop/${s.slug || s.id}" class="py-2 px-4 rounded-xl bg-dhwani-green hover:bg-dhwani-greenDark text-white font-bold text-xs shadow-xs transition">${t('visit_shop_btn')}</a>
+            <a href="#/passport/${s.slug || s.id}" class="text-xs font-bold text-dhwani-terracotta hover:underline flex items-center gap-1"><i data-lucide="award" class="w-3.5 h-3.5"></i> ${t('passport_btn')}</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function handleDiscoverSearch(q) {
+      discoverFilter.query = q;
+      const grid = document.getElementById('discover-shops-grid');
+      if (grid) {
+        grid.innerHTML = renderDiscoverShopsGrid(await Store.getSellers());
+        lucide.createIcons();
+      }
+    }
+
+    async function setDiscoverDistrict(d) {
+      discoverFilter.district = d;
+      const app = document.getElementById('app');
+      if (app) {
+        app.innerHTML = await renderDiscoverScreen();
+        lucide.createIcons();
+      }
+    }
+
+    async function setDiscoverCategory(c) {
+      discoverFilter.category = c;
+      const app = document.getElementById('app');
+      if (app) {
+        app.innerHTML = await renderDiscoverScreen();
+        lucide.createIcons();
+      }
+    }
+
+    async function resetDiscoverFilters() {
+      discoverFilter = { district: 'all', category: 'all', query: '' };
+      const app = document.getElementById('app');
+      if (app) {
+        app.innerHTML = await renderDiscoverScreen();
+        lucide.createIcons();
+      }
+    }
+
+    // ====================================================================
+    // SCREEN 6: BUSINESS PASSPORT (#/passport/<slug>)
+    // ====================================================================
+    let passportChart = null;
+
+    async function renderPassportScreen(slug) {
+      const p = await Store.getPassport(slug);
+      if (!p) return `<div class="text-center py-20"><h2 class="text-2xl font-bold">Passport Not Found</h2></div>`;
+      const s = p.seller;
+      const m = p.metrics;
+      const c = p.consistency_score;
+
+      return `
+        <div class="max-w-4xl mx-auto space-y-6 text-left">
+          <div id="print-certificate-area" class="bg-white p-6 sm:p-10 rounded-30 border-2 border-dhwani-border shadow-card space-y-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b-2 border-dhwani-border gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-2xl bg-dhwani-green text-white flex items-center justify-center font-bold text-xl shadow-md">
+                  <i data-lucide="award" class="w-8 h-8 text-dhwani-turmeric"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-dhwani-green uppercase">${t('passport_heading')}</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">${t('passport_sub_badge')}</span>
+                  </div>
+                  <h1 class="text-2xl sm:text-3xl font-bold text-dhwani-ink font-serif-heading">${s.shop_name}</h1>
+                  <p class="text-xs text-dhwani-muted">Proprietor: <strong class="text-dhwani-ink">${s.name}</strong> • 📍 ${s.district}, Karnataka</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-dhwani-cream p-3 rounded-20 border border-dhwani-border">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dhwani-turmeric to-dhwani-terracotta text-white flex flex-col items-center justify-center font-bold">
+                  <span class="text-xl leading-none">${c.total_score}</span>
+                  <span class="text-[9px]">/ 100</span>
+                </div>
+                <div>
+                  <span class="block text-xs font-bold text-dhwani-ink">${t('consistency_score')}</span>
+                  <span class="text-[11px] text-emerald-700 font-bold">Lender Verified</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+              ℹ️ ${t('passport_disclaimer')}
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="bg-dhwani-cream/70 p-4 rounded-20 border"><span class="text-xs font-bold text-dhwani-muted">${t('months_active')}</span><div class="text-2xl font-bold mt-1">${m.months_active} Mos</div></div>
+              <div class="bg-dhwani-cream/70 p-4 rounded-20 border"><span class="text-xs font-bold text-dhwani-muted">${t('total_sales')}</span><div class="text-2xl font-bold text-dhwani-green mt-1">₹${m.total_sales.toLocaleString('en-IN')}</div></div>
+              <div class="bg-dhwani-cream/70 p-4 rounded-20 border"><span class="text-xs font-bold text-dhwani-muted">${t('avg_monthly_sales')}</span><div class="text-2xl font-bold mt-1">₹${m.avg_monthly_sales.toLocaleString('en-IN')}</div></div>
+              <div class="bg-dhwani-cream/70 p-4 rounded-20 border"><span class="text-xs font-bold text-dhwani-muted">${t('repeat_customer_rate')}</span><div class="text-2xl font-bold text-dhwani-terracotta mt-1">${m.repeat_rate_percent}%</div></div>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-dhwani-ink uppercase">${t('weekly_trend_heading')}</h3>
+              <div class="bg-white p-4 rounded-20 border h-64 relative"><canvas id="passport-sales-chart"></canvas></div>
+            </div>
+
+            <div class="bg-dhwani-cream p-5 rounded-20 border space-y-3">
+              <h4 class="font-bold text-sm text-dhwani-ink">${t('score_formula_heading')}</h4>
+              <p class="text-xs text-dhwani-muted font-mono">${c.formula}</p>
+            </div>
+          </div>
+
+          <div class="no-print flex items-center justify-end gap-3">
+            <button onclick="window.print()" class="px-6 py-3 rounded-xl bg-dhwani-green text-white font-bold text-xs shadow-card flex items-center gap-2">
+              <i data-lucide="download" class="w-4 h-4 text-dhwani-turmeric"></i>
+              <span>${t('download_pdf')}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function initPassportEvents(slug) {
+      setTimeout(async () => {
+        const p = await Store.getPassport(slug);
+        const ctx = document.getElementById('passport-sales-chart');
+        if (p && ctx && typeof Chart !== 'undefined') {
+          if (passportChart) passportChart.destroy();
+          passportChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: p.weekly_trend.map(w => w.date_label || w.week_label),
+              datasets: [{ label: 'Sales (₹)', data: p.weekly_trend.map(w => w.sales), backgroundColor: '#1F5E4B', borderRadius: 6 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+          });
+        }
+      }, 50);
+    }
+
+    // ====================================================================
+    // SCREEN 7: DUAL PHONE DEMO (#/demo)
+    // ====================================================================
+    async function renderSplitScreenDemo() {
+      const seller = SEED_SELLERS[0];
+      const listings = await Store.getListings(seller.id);
+      const orders = await Store.getOrders(seller.id);
+
+      return `
+        <div class="space-y-6 text-left">
+          <div class="bg-gradient-to-r from-dhwani-green to-dhwani-greenDark text-white p-6 rounded-30 shadow-card flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-dhwani-turmeric text-dhwani-ink mb-2">⚡ Karnataka Live Realtime Sync</span>
+              <h1 class="text-2xl sm:text-3xl font-bold font-serif-heading">${t('demo_title')}</h1>
+              <p class="text-xs sm:text-sm text-white/80 mt-1">${t('demo_sub')}</p>
+            </div>
+            <button onclick="triggerQuickDemoOrder()" class="px-5 py-3 rounded-20 bg-dhwani-turmeric text-dhwani-ink font-bold text-xs shadow-glow">
+              ${t('quick_test_order_btn')}
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="bg-slate-900 p-5 rounded-[36px] shadow-2xl border-4 border-slate-700 space-y-4">
+              <div class="flex justify-between text-xs text-white/70 px-2 pb-2 border-b border-slate-800">
+                <span class="font-bold text-dhwani-turmeric">📱 ${t('seller_phone_heading')} (Renuka Patil)</span>
+                <span class="text-emerald-400">● Live Stream</span>
+              </div>
+              <div class="bg-dhwani-cream rounded-20 p-4 space-y-3 max-h-[550px] overflow-y-auto" id="split-orders-list">
+                ${orders.slice(0, 5).map(o => `
+                  <div class="bg-white p-3 rounded-xl border text-xs space-y-1">
+                    <div class="flex justify-between font-bold"><span>${o.buyer_name}</span><span class="text-dhwani-green">₹${o.amount}</span></div>
+                    <p class="text-[11px] text-dhwani-muted truncate">${Array.isArray(o.items) ? o.items.map(i => `${i.qty}x ${i.title}`).join(', ') : 'Order'}</p>
+                    <div class="flex justify-between pt-1 border-t text-[10px]"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold uppercase">${o.status}</span><span>${new Date(o.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</span></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="bg-slate-900 p-5 rounded-[36px] shadow-2xl border-4 border-slate-700 space-y-4">
+              <div class="flex justify-between text-xs text-white/70 px-2 pb-2 border-b border-slate-800">
+                <span class="font-bold text-emerald-400">📱 ${t('buyer_phone_heading')}</span>
+                <span class="text-white/60">Tap 1-Tap Order</span>
+              </div>
+              <div class="bg-white rounded-20 p-4 space-y-3 max-h-[550px] overflow-y-auto">
+                <div class="bg-gradient-to-r from-dhwani-turmeric to-dhwani-terracotta p-3 rounded-xl text-white">
+                  <h4 class="font-bold text-xs">${seller.shop_name}</h4>
+                  <span class="text-[10px]">📍 ${seller.district}</span>
+                </div>
+                <div class="space-y-2">
+                  ${listings.slice(0, 3).map(i => `
+                    <div class="bg-dhwani-cream/60 p-2.5 rounded-xl border flex justify-between items-center text-xs">
+                      <div class="truncate mr-2"><strong class="block truncate">${i.title}</strong><span class="text-dhwani-green font-bold">₹${i.price}</span></div>
+                      <button onclick="handleSplitQuickOrder('${i.id}', '${i.title}', ${i.price})" class="px-3 py-1.5 bg-dhwani-green text-white font-bold rounded-lg">${t('order_one_tap')}</button>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function initSplitScreenEvents() {
+      window.addEventListener('dhwani_order_received', (ev) => {
+        const ord = ev.detail;
+        const list = document.getElementById('split-orders-list');
+        if (list && ord) {
+          const el = document.createElement('div');
+          el.className = "bg-white p-3 rounded-xl border-2 border-dhwani-turmeric text-xs space-y-1 animate-pop-in shadow-md";
+          el.innerHTML = `<div class="flex justify-between font-bold"><span>${ord.buyer_name}</span><span class="text-dhwani-green">₹${ord.amount}</span></div><p class="text-[11px] text-dhwani-muted">${Array.isArray(ord.items) ? ord.items.map(i => `${i.qty}x ${i.title}`).join(', ') : 'Order'}</p><div class="flex justify-between pt-1 border-t text-[10px]"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">JUST RECEIVED ✨</span><span>Just now</span></div>`;
+          list.prepend(el);
+        }
+      });
+    }
+
+    async function handleSplitQuickOrder(id, title, price) {
+      AudioEngine.playChime('order');
+      if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 50 });
+      await Store.createOrder({
+        seller_id: SEED_SELLERS[0].id,
+        items: [{ listing_id: id, title, price, qty: 1 }],
+        buyer_name: 'Praveen Joshi (Demo)',
+        buyer_phone: '9845110001',
+        qty: 1,
+        amount: price,
+        status: 'paid',
+        fulfilment: 'rider',
+        created_at: new Date().toISOString()
+      });
+      showToast('Order Sent!', `₹${price} for ${title}`, 'order');
+    }
+
+    function triggerQuickDemoOrder() {
+      handleSplitQuickOrder('l-quick', 'Shenga Holige (10 pcs)', 220);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Store.init();
+      Router.init();
+      setLanguage(CURRENT_LANG);
+    });
+  </script>
+</body>
+</html>
